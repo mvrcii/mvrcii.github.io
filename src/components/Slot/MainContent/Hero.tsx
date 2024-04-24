@@ -2,6 +2,15 @@ import {Box, Button, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import heroImage from '../../../assets/hero.jpg';
 import {Cursor, useTypewriter} from "react-simple-typewriter";
+import React, {useEffect, useState} from "react";
+
+const slangToColors: WordColorPair[] = [
+    {text: 'Machine Learning.', color: '#181D7Aff'},
+    {text: 'Computer Vision.', color: '#793144ff'},
+    {text: 'Software Development.', color: '#194A1Cff'},
+    {text: 'AI Safety.', color: '#703524ff'},
+    {text: 'Research.', color: '#3699D5ff'}
+];
 
 export const Hero = () => {
     return (
@@ -11,14 +20,13 @@ export const Hero = () => {
             </ImageBox>
             <TextBox>
                 <TitleText>I'm Marcel Roth</TitleText>
-                <TypewriterHook/>
+                <TypewriterHook words={slangToColors}/>
                 <Box sx={{margin: '18px 0 32px 0'}}>
                     <StyledButton>LinkedIn</StyledButton>
                     <StyledButton>GitHub</StyledButton>
                     <StyledButton>Mail</StyledButton>
                 </Box>
             </TextBox>
-
         </StyledBox>
     );
 }
@@ -39,37 +47,57 @@ const StyledButton = styled(Button)(({theme}) => ({
     }
 }));
 
-const TitleText = styled(Typography)({
+export const TitleText = styled(Typography)({
     fontFamily: '"Marcellus", serif',
     fontWeight: 400,
     fontSize: '2.625rem',
     lineHeight: '4rem'
 });
 
-const Highlight = styled('u')({
+const Highlight = styled('u')<{ color: string }>(({color = '#341677'}) => ({
     textDecoration: 'none',
-    boxShadow: 'inset 0 -.5em 0 #341677',
+    boxShadow: `inset 0 -.5em 0 ${color}`,
     transition: 'box-shadow .3s ease-out',
-
     '&:hover': {
-        boxShadow: 'inset 0 -1em 0 #341677',
+        boxShadow: 'inset 0 -1em 0 ${color}',
     }
-});
+}));
 
-const TypewriterHook = () => {
-    const [text] = useTypewriter({
-        words: [
-            'Machine Learning.',
-            'Computer Vision.',
-            'Software Development.',
-            'AI Safety.',
-            'Research.',
-        ],
+interface WordColorPair {
+    text: string;
+    color: string;
+}
+
+interface TypewriterHookProps {
+    words: WordColorPair[];
+    color?: string;
+}
+
+const TypewriterHook: React.FC<TypewriterHookProps> = ({words, color = '#341677'}) => {
+    const wordsText = words.map((item) => item.text);
+    const [currentText, {isType}] = useTypewriter({
+        words: wordsText,
         loop: true,
         typeSpeed: 50,
         deleteSpeed: 20,
         delaySpeed: 1200,
+        onLoopDone: () => console.log('Loop finished')
     });
+
+    const [currentColor, setCurrentColor] = useState(color); // Initial default color
+    const [lastTypeWord, setLastTypeWord] = useState('');
+
+    // When a new word starts being typed, use the color of the word
+    useEffect(() => {
+        if (isType && currentText.length === 1 && lastTypeWord !== currentText) {
+            setLastTypeWord(currentText);
+            const wordColor = words.find(item => item.text.startsWith(currentText))?.color;
+            if (wordColor) {
+                setCurrentColor(wordColor);
+            }
+        }
+    }, [currentText, isType, words]);
+
 
     const customCursor = (
         <span style={{
@@ -85,16 +113,8 @@ const TypewriterHook = () => {
             display: 'flex', alignItems: 'center', lineHeight: '3rem',
             margin: "-.5rem 0 0"
         }}>
-            <TitleText
-                component="span"
-                className="fadeInText"
-                sx={{
-                    fontSize: '2rem',
-                    lineHeight: '3rem',
-                    margin: "-.5rem 0 0",
-                }}
-            >
-                I am doing <Highlight>{text}</Highlight>
+            <TitleText component="span" sx={{fontSize: '2rem', lineHeight: '3rem'}}>
+                I am doing <Highlight color={currentColor}>{currentText}</Highlight>
             </TitleText>
             <Cursor cursorStyle={customCursor}/>
         </Box>
