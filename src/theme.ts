@@ -4,7 +4,7 @@ export const baseTheme = createTheme({
     typography: {
         fontFamily: '"Roboto", Arial, sans-serif',
         h1: {
-            fontWeight: 900,
+            fontWeight: 700,
             letterSpacing: "-.05em",
             lineHeight: "90%",
             fontSize: '4.5rem',
@@ -12,13 +12,13 @@ export const baseTheme = createTheme({
             paddingTop: '1rem'
         },
         h2: {
-            fontWeight: 900,
+            fontWeight: 700,
             fontSize: '2rem',
             letterSpacing: "-.05em",
         },
         h3: {
             fontWeight: 900,
-            fontSize: '1.75rem'
+            fontSize: '2rem'
         },
         h4: {
             fontWeight: 500,
@@ -69,12 +69,6 @@ export const baseTheme = createTheme({
                 '#root': {
                     flex: '1 0 auto',  // Allows root to expand with content
                     overflow: 'auto',  // Allows scrolling within the root container
-                },
-                'main': {
-                    flexGrow: 1,  // Allows main to expand and fill space
-                    flex: '1 0 auto',
-                    overflow: 'auto',  // Allows scrolling within the main content
-                    marginTop: '2rem',
                 }
             },
         },
@@ -95,9 +89,10 @@ export const baseTheme = createTheme({
                 root: {
                     flexShrink: 0,
                     height: 100,
+                    width: '100%',
                     maxWidth: '62.5rem !important',
                     padding: '0 2.5rem !important',
-                    margin: '0 auto 8rem'
+                    margin: '0 auto 4rem',
                 }
             }
         },
@@ -107,6 +102,8 @@ export const baseTheme = createTheme({
                     padding: '0 !important',
                     height: 'inherit',
                     width: 'inherit',
+
+                    // boxShadow: 'rgba(255, 255, 255, 0.35) 0px 25px 20px -30px'
                 },
             },
         },
@@ -115,7 +112,8 @@ export const baseTheme = createTheme({
                 root: {
                     maxWidth: '62.5rem !important',
                     padding: '0 2.5rem !important',
-                    margin: '0 auto 8rem'
+                    margin: '0 auto 8rem',
+                    scrollMargin: '100px' // Offset for scrollIntoView navigation to account for sticky header
                 },
             },
         },

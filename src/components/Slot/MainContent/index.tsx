@@ -1,14 +1,17 @@
 import React from "react";
-import {Container, Typography} from "@mui/material";
+import {Box, Container, Typography} from "@mui/material";
+import {Hero} from "./Hero.tsx";
 
 export function MainContent(): React.ReactElement {
     return (
-        <>
-            <Container>
-                <div id="about">
-                    <Typography variant="h1">About</Typography>
-                    <Typography variant="body1">Details about me...</Typography>
-                </div>
+        <Box>
+            <Container id="hero">
+                <Hero/>
+            </Container>
+
+            <Container id="about">
+                <Typography variant="h1">About</Typography>
+                <Typography variant="body1">Details about me...</Typography>
             </Container>
 
             <Container id="github">
@@ -205,6 +208,6 @@ export function MainContent(): React.ReactElement {
                     dolor sit amet. Lorem ipsum dolor sit amet, consetetur
                 </Typography>
             </Container>
-        </>
+        </Box>
     );
 }

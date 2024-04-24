@@ -4,7 +4,6 @@ export const ScrollManager = () => {
     useEffect(() => {
         const scrollToElement = () => {
             const hash = window.location.hash;
-            console.log(hash)
             if (hash) {
                 const id = hash.replace('#', '');
                 document.getElementById(id)?.scrollIntoView({

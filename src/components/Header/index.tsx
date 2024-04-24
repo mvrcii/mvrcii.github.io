@@ -4,10 +4,19 @@ import {styled} from '@mui/material/styles';
 import {CVButton} from "./CVButton.tsx";
 
 export function Header(): React.ReactElement {
+    const handleAuthorClick = () => {
+        window.history.pushState(null, "", "/");  // Set URL to root without reloading the page
+        // Scroll to the top of the page
+        document.getElementsByTagName("main")[0]?.scrollIntoView({
+            behavior: 'instant',
+            block: 'start'
+        });
+    };
+
     return (
-        <AppBar position="static" id="header">
+        <AppBar position="sticky" id="header">
             <Toolbar>
-                <AuthorName variant="h2">Marcel Roth</AuthorName>
+                <AuthorName variant="h2" onClick={handleAuthorClick}>Portfolio</AuthorName>
                 <Box>
                     <NavigationButton label="About" sectionId="about"/>
                     <NavigationButton label="GitHub" sectionId="github"/>
@@ -23,7 +32,6 @@ const AppBar = styled(MuiAppBar)(({theme}) => ({
     backgroundColor: theme.palette.background.default,
     backgroundImage: 'none',
     boxShadow: 'none',
-    width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -31,7 +39,9 @@ const AppBar = styled(MuiAppBar)(({theme}) => ({
 
 const AuthorName = styled(Typography)(({theme}) => ({
     color: theme.palette.text.primary,
+    cursor: 'pointer',
     flexGrow: 1,
+    userSelect: 'none',
 }));
 
 
