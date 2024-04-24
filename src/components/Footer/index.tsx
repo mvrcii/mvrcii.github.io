@@ -4,26 +4,29 @@ import {styled} from "@mui/material/styles";
 
 export function Footer(): React.ReactElement {
     return (
-        <StyledBox component='footer'>
-            <StyledContainer sx={{margin: '0 auto'}}>
+        <FooterBox component='footer'>
+            <StyledContainer>
                 <Typography variant='h4'>
                     © {new Date().getFullYear()} Marcel Roth
                 </Typography>
             </StyledContainer>
-        </StyledBox>
+        </FooterBox>
     );
 }
 
-const StyledBox = styled(Box)(({theme}) => ({
+const FooterBox = styled(Box)(({theme}) => ({
     backgroundColor: theme.palette.primary.main,
-    position: 'relative'
+    position: 'relative',
+    flexShrink: 0,
+    height: '120px',
 }));
 
 const StyledContainer = styled(Container)(({theme}) => ({
-    minHeight: '120px',
+    height: 'inherit',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    margin: '0 auto',
 
     '& .MuiTypography-root': {
         color: theme.palette.background.default,

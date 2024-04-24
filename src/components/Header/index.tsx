@@ -1,23 +1,21 @@
 import React from 'react';
-import {AppBar as MuiAppBar, Box, Button, Container, Toolbar as MuiToolbar, Typography} from "@mui/material";
+import {AppBar as MuiAppBar, Box, Button, Toolbar, Typography} from "@mui/material";
 import {styled} from '@mui/material/styles';
-import resume from '../../assets/resume.pdf';
+import {CVButton} from "./CVButton.tsx";
 
 export function Header(): React.ReactElement {
     return (
-        <Container component="header" sx={{margin: '0 auto'}}>
-            <AppBar position="static">
-                <Toolbar>
-                    <AuthorName>Marcel Roth</AuthorName>
-                    <Box>
-                        <NavigationButton label="About" sectionId="about"/>
-                        <NavigationButton label="GitHub" sectionId="github"/>
-                        <NavigationButton label="Projects" sectionId="projects"/>
-                        <CVButton/>
-                    </Box>
-                </Toolbar>
-            </AppBar>
-        </Container>
+        <AppBar position="static" id="header">
+            <Toolbar>
+                <AuthorName variant="h2">Marcel Roth</AuthorName>
+                <Box>
+                    <NavigationButton label="About" sectionId="about"/>
+                    <NavigationButton label="GitHub" sectionId="github"/>
+                    <NavigationButton label="Projects" sectionId="projects"/>
+                    <CVButton/>
+                </Box>
+            </Toolbar>
+        </AppBar>
     );
 }
 
@@ -25,26 +23,14 @@ const AppBar = styled(MuiAppBar)(({theme}) => ({
     backgroundColor: theme.palette.background.default,
     backgroundImage: 'none',
     boxShadow: 'none',
-    minHeight: '100px',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
 }));
 
-const Toolbar = styled(MuiToolbar)({
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    minHeight: '100px',
-});
-
-
 const AuthorName = styled(Typography)(({theme}) => ({
-    fontSize: '2rem',
-    fontWeight: 900,
-    color: theme.palette.text.primary,  // Using color from the theme
+    color: theme.palette.text.primary,
     flexGrow: 1,
 }));
 
@@ -54,48 +40,26 @@ interface NavigationButtonProps {
     sectionId: string;
 }
 
-function NavigationButton(props: NavigationButtonProps) {
+const NavigationButton: React.FC<NavigationButtonProps> = ({label, sectionId}) => {
 
-    function handleNavigation(sectionId: string) {
-        scrollToSection(sectionId, () => {
-            window.location.hash = sectionId;  // Update the hash after scrolling is complete
-        });
-    }
-
-    function scrollToSection(sectionId: string, callback: () => void) {
+    const handleNavigation = () => {
         const section = document.getElementById(sectionId);
         if (section) {
-            const offset = 64;
-            const bodyRect = document.body.getBoundingClientRect().top;
-            const sectionRect = section.getBoundingClientRect().top;
-            const sectionPosition = sectionRect - bodyRect;
-            const offsetPosition = sectionPosition - offset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
+            section.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             });
-
-            // Ensure hash is updated after the scroll
-            section.addEventListener('scroll', function onScroll() {
-                if (Math.abs(window.scrollY - offsetPosition) < 10) {
-                    window.removeEventListener('scroll', onScroll);
-                    callback();
-                }
-            });
+            // Updates URL without causing a scroll
+            window.history.pushState(null, "", `#${sectionId}`);
         }
-    }
-
-    function handleClick() {
-        handleNavigation(props.sectionId);
-    }
+    };
 
     return (
-        <StyledNavigationButton disableRipple onClick={handleClick}>
-            {props.label}
+        <StyledNavigationButton disableRipple onClick={handleNavigation}>
+            {label}
         </StyledNavigationButton>
     );
-}
+};
 
 const StyledNavigationButton = styled(Button)(({theme}) => ({
     marginRight: '4rem',
@@ -125,31 +89,6 @@ const StyledNavigationButton = styled(Button)(({theme}) => ({
         color: theme.palette.primary.main,
         backgroundColor: theme.palette.background.default,
     },
-    '&:active': {
-
-    }
+    '&:active': {}
 }));
 
-function CVButton() {
-    return (
-        <a href={resume} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
-            <StyledCVButton variant="contained" color="primary">
-                Resume
-            </StyledCVButton>
-        </a>
-    );
-}
-
-const StyledCVButton = styled(Button)(({theme}) => ({
-    borderRadius: '1rem',
-    backgroundColor: theme.palette.background.default,
-    border: `0.125rem solid ${theme.palette.primary.main}`,
-    boxShadow: 'none',
-    color: theme.palette.primary.main,
-    padding: '0.5rem 1.5rem',
-    transition: '20ms ease-out',
-    '&:hover': {
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.background.default,
-    }
-}));

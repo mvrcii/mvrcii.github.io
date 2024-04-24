@@ -1,36 +1,41 @@
 import React from "react";
-import {Container} from "@mui/material";
+import {Container, Typography} from "@mui/material";
 
 export function MainContent(): React.ReactElement {
     return (
         <>
             <Container>
                 <div id="about">
-                    <h1>About</h1>
-                    <p>Details about me...</p>
+                    <Typography variant="h1">About</Typography>
+                    <Typography variant="body1">Details about me...</Typography>
                 </div>
             </Container>
 
-            <Container>
-                <div id="github">
-                    <h1>Github</h1>
-                    <p>Some of my work...</p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+            <Container id="github">
+                <Typography variant="h1">Github</Typography>
+                <Typography variant="body1">Some of my work...
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                    ut
+                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                    dolores
                     et
-                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                    Lorem
                     ipsum
                     dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
                     dolore
                     magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
                     Stet
-                    clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                    amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                    clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
+                    sit
+                    amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+                    magna
                     aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
                     clita
                     kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
+                    illum
                     dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
                     praesent
                     luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
@@ -48,41 +53,55 @@ export function MainContent(): React.ReactElement {
 
                     Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim
                     placerat
-                    facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
+                    facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                    nibh
+                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+                    quis
                     nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
 
-                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
+                    illum
                     dolore eu feugiat nulla facilisis.
 
-                    At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                    sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+                    At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                    takimata
+                    sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+                    sed
+                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                    At
                     vero
-                    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+                    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+                    sanctus
                     est
                     Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam
                     aliquyam
-                    diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet
+                    diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore
+                    Stet
                     clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem
                     ipsum
                     dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                    ut
+                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                    dolores
                     et
-                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                    Lorem
                     ipsum
                     dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
                     dolore
                     magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
                     Stet
-                    clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                    amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                    clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
+                    sit
+                    amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+                    magna
                     aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
                     clita
                     kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
+                    illum
                     dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
                     praesent
                     luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
@@ -100,31 +119,38 @@ export function MainContent(): React.ReactElement {
 
                     Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim
                     placerat
-                    facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
+                    facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                    nibh
+                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+                    quis
                     nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
 
-                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
+                    illum
                     dolore eu feugiat nulla facilisis.
 
-                    At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                    sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+                    At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                    takimata
+                    sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+                    sed
+                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                    At
                     vero
-                    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+                    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+                    sanctus
                     est
                     Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam
                     aliquyam
-                    diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet
+                    diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore
+                    Stet
                     clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem
                     ipsum
                     dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                </div>
+                </Typography>
             </Container>
-            <Container>
-                <div id="projects">
-                    <h1>Projects</h1>
-                    <p>My professional experience...</p>
+            <Container id="projects">
+                <Typography variant="h1">Projects</Typography>
+                <Typography variant="body1">My professional experience...
                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
                     labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
                     et
@@ -177,7 +203,7 @@ export function MainContent(): React.ReactElement {
                     clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem
                     ipsum
                     dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                </div>
+                </Typography>
             </Container>
         </>
     );
