@@ -1,4 +1,4 @@
-import resume from "../../assets/resume.pdf";
+import resume from "../../../../assets/resume.pdf";
 import {styled} from "@mui/material/styles";
 import {Button} from "@mui/material";
 
