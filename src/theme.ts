@@ -86,6 +86,16 @@ export const baseTheme = createTheme({
                 },
             },
         },
+        MuiIconButton: {
+            styleOverrides: {
+                root: {
+                    padding: 0,
+                    '&:hover': {
+                        backgroundColor: 'rgba(0, 0, 0, 0.50)'
+                    }
+                }
+            }
+        },
         MuiAppBar: {
             styleOverrides: {
                 root: {
@@ -126,6 +136,39 @@ export const baseTheme = createTheme({
                     fontSize: '2rem',
                 },
             },
-        }
+        },
+        MuiSnackbar: {
+            styleOverrides: {
+                root: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }
+            }
+        },
+        MuiAlert: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#333333',
+                    color: '#fafafa',
+                    alignItems: 'center',
+                    display: 'flex',
+                    justifyContent: 'center'
+                },
+                message: {
+                    color: '#fafafa',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                },
+                action: {
+                    color: '#fafafa',
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '7px 0 7px 0',
+                    marginLeft: '12px',
+                }
+            }
+        },
     }
 });

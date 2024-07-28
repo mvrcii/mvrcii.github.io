@@ -1,4 +1,4 @@
-import {Box, Button, Container, Typography} from "@mui/material";
+import {Alert, Box, Button, Container, Snackbar, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import heroImage from '../../../assets/hero.jpg';
 import {Cursor, useTypewriter} from "react-simple-typewriter";
@@ -13,6 +13,23 @@ const slangToColors: WordColorPair[] = [
 ];
 
 export const Hero = () => {
+    const [open, setOpen] = React.useState(false);
+
+    const handleCopyEmail = async () => {
+        try {
+            await navigator.clipboard.writeText('marcelroth100@aol.com');
+            setOpen(true);
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    };
+
+    const handleClose = (_event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
     return (
         <Container id="hero">
             <StyledBox>
@@ -23,12 +40,22 @@ export const Hero = () => {
                     <TitleText>I'm Marcel Roth</TitleText>
                     <TypewriterHook words={slangToColors}/>
                     <Box sx={{margin: '18px 0 32px 0'}}>
-                        <StyledButton>LinkedIn</StyledButton>
-                        <StyledButton>GitHub</StyledButton>
-                        <StyledButton>Mail</StyledButton>
+                        <a href="https://www.linkedin.com/in/mvrcelroth/" target="_blank" rel="noopener noreferrer">
+                            <StyledButton>LinkedIn</StyledButton>
+                        </a>
+                        <a href="https://github.com/mvrcii" target="_blank" rel="noopener noreferrer">
+                            <StyledButton>GitHub</StyledButton>
+                        </a>
+                        <StyledButton component="span" onClick={handleCopyEmail}>Mail</StyledButton>
                     </Box>
                 </TextBox>
             </StyledBox>
+            <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}
+                      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Email address copied to clipboard!
+                </Alert>
+            </Snackbar>
         </Container>
     );
 }
