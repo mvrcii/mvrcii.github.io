@@ -1,5 +1,7 @@
 import {createTheme} from "@mui/material";
 
+const headerSize = 100;
+
 export const baseTheme = createTheme({
     typography: {
         fontFamily: '"Roboto", Arial, sans-serif',
@@ -113,9 +115,17 @@ export const baseTheme = createTheme({
                     maxWidth: '62.5rem !important',
                     padding: '0 2.5rem !important',
                     margin: '0 auto 8rem',
-                    scrollMargin: '100px' // Offset for scrollIntoView navigation to account for sticky header
+                    scrollMargin: `${headerSize}px` // Offset for scrollIntoView navigation to account for sticky header
                 },
             },
         },
+        MuiSvgIcon: {
+            styleOverrides: {
+                root: {
+                    fill: '#fafafa',
+                    fontSize: '2rem',
+                },
+            },
+        }
     }
 });
