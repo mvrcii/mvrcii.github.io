@@ -1,4 +1,4 @@
-import {Box, Button, Typography} from "@mui/material";
+import {Box, Button, Container, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import heroImage from '../../../assets/hero.jpg';
 import {Cursor, useTypewriter} from "react-simple-typewriter";
@@ -14,20 +14,22 @@ const slangToColors: WordColorPair[] = [
 
 export const Hero = () => {
     return (
-        <StyledBox>
-            <ImageBox>
-                <img src={heroImage} alt="Hero Image"/>
-            </ImageBox>
-            <TextBox>
-                <TitleText>I'm Marcel Roth</TitleText>
-                <TypewriterHook words={slangToColors}/>
-                <Box sx={{margin: '18px 0 32px 0'}}>
-                    <StyledButton>LinkedIn</StyledButton>
-                    <StyledButton>GitHub</StyledButton>
-                    <StyledButton>Mail</StyledButton>
-                </Box>
-            </TextBox>
-        </StyledBox>
+        <Container id="hero">
+            <StyledBox>
+                <ImageBox>
+                    <img src={heroImage} alt="Hero Image"/>
+                </ImageBox>
+                <TextBox>
+                    <TitleText>I'm Marcel Roth</TitleText>
+                    <TypewriterHook words={slangToColors}/>
+                    <Box sx={{margin: '18px 0 32px 0'}}>
+                        <StyledButton>LinkedIn</StyledButton>
+                        <StyledButton>GitHub</StyledButton>
+                        <StyledButton>Mail</StyledButton>
+                    </Box>
+                </TextBox>
+            </StyledBox>
+        </Container>
     );
 }
 
@@ -96,7 +98,7 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words, color = '#341677'
                 setCurrentColor(wordColor);
             }
         }
-    }, [currentText, isType, words]);
+    }, [currentText, isType, lastTypeWord, words]);
 
 
     const customCursor = (
