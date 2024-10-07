@@ -8,7 +8,6 @@ const buttonsConfig = [
     {label: 'About', sectionId: 'about'},
     {label: 'Education', sectionId: 'education'},
     {label: 'Challenges', sectionId: 'challenges'},
-    {label: 'Projects', sectionId: 'projects'}
 ];
 
 export function HeaderBar(): React.ReactElement {
