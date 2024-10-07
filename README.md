@@ -3,5 +3,13 @@
 ### Using: React + TypeScript + Vite
 
 
-### Deployment
-````pnpm run deploy````
+### Developing
+```bash
+pnpm run dev
+```
+
+
+### Deploying the Portfolio Page
+````bash
+pnpm run deploy
+````
