@@ -9,7 +9,7 @@ export const baseTheme = createTheme({
             fontWeight: 700,
             letterSpacing: "-.05em",
             lineHeight: "90%",
-            fontSize: '4.5rem',
+            fontSize: '3.5rem',
             marginBottom: '0.5rem',
             paddingTop: '1rem'
         },
