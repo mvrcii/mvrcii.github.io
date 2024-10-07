@@ -30,12 +30,13 @@ export const Hero = () => {
         }
         setOpen(false);
     };
+
     return (
         <Container id="hero">
             <StyledBox>
-                <ImageBox>
+                <ImageContainer>
                     <img src={heroImage} alt="Hero Image"/>
-                </ImageBox>
+                </ImageContainer>
                 <TextBox>
                     <TitleText>I'm Marcel Roth</TitleText>
                     <TypewriterHook words={slangToColors}/>
@@ -50,9 +51,10 @@ export const Hero = () => {
                     </Box>
                 </TextBox>
             </StyledBox>
-            <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}
-                      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+
+            <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}
+                      anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}>
+                <Alert onClose={handleClose} severity="success" sx={{width: '100%'}}>
                     Email address copied to clipboard!
                 </Alert>
             </Snackbar>
@@ -161,9 +163,9 @@ const StyledBox = styled(Box)(({theme}) => ({
     },
 }));
 
-const ImageBox = styled(Box)({
-    width: '300px',
-    height: '300px',
+const ImageContainer = styled(Box)({
+    width: '250px',
+    height: '250px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -173,6 +175,7 @@ const ImageBox = styled(Box)({
         height: '100%',
         objectFit: 'cover',
         borderRadius: "50%",
+        border: '2px solid #fafafa',
     }
 });
 

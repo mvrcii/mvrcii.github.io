@@ -1,5 +1,5 @@
 import {BrowserRouter, Outlet, Route, Routes} from 'react-router-dom';
-import {MainContent} from "../components/main/MainContent";
+import {MainWrapper} from "../components/main/MainWrapper.tsx";
 import {ErrorPage} from "../components/misc/ErrorPage.tsx";
 import {styled} from "@mui/material/styles";
 import {Box} from "@mui/material";
@@ -27,7 +27,7 @@ export function AppRoutes() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Slot/>}>
-                    <Route index element={<MainContent/>}/>
+                    <Route index element={<MainWrapper/>}/>
                     <Route path="*" element={<ErrorPage/>}/>
                 </Route>
             </Routes>

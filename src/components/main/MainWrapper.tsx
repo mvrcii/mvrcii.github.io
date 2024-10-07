@@ -1,9 +1,9 @@
 import React from "react";
 import {Box, Container, Typography} from "@mui/material";
-import {Hero} from "./Hero.tsx";
+import {Hero} from "./hero/Hero.tsx";
 
 
-export function MainContent(): React.ReactElement {
+export function MainWrapper(): React.ReactElement {
     return (
         <Box>
             <Hero/>
