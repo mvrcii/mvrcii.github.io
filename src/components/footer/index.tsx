@@ -2,7 +2,7 @@ import React from "react";
 import {Box, Container, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 
-export function Footer(): React.ReactElement {
+export function FooterBar(): React.ReactElement {
     return (
         <FooterBox component='footer'>
             <StyledContainer>

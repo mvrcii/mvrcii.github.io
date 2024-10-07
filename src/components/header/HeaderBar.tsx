@@ -11,7 +11,7 @@ const buttonsConfig = [
     {label: 'Projects', sectionId: 'projects'}
 ];
 
-export function Header(): React.ReactElement {
+export function HeaderBar(): React.ReactElement {
     return (
         <StyledAppBar position="sticky" id="header">
             <MuiToolbar>
@@ -32,6 +32,4 @@ const StyledAppBar = styled(MuiAppBar)(({theme}) => ({
 }));
 
 export default buttonsConfig;
-
-
 

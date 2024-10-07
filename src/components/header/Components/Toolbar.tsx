@@ -3,7 +3,7 @@ import {Box, Hidden} from "@mui/material";
 import {CVButton} from "./Common/CVButton.tsx";
 import {NavButton} from "./Common/NavButton.tsx";
 import AuthorName from "./Common/AuthorName.tsx";
-import buttonsConfig from "../index.tsx";
+import buttonsConfig from "../HeaderBar.tsx";
 
 export const Toolbar: React.FC = () => {
 

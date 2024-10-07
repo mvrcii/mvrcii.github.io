@@ -5,7 +5,7 @@ import {styled} from "@mui/material/styles";
 import {NavButton} from "./Common/NavButton.tsx";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import AuthorName from "./Common/AuthorName.tsx";
-import buttonsConfig from "../index.tsx";
+import buttonsConfig from "../HeaderBar.tsx";
 
 
 export const Sidebar: React.FC = () => {
