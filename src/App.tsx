@@ -1,9 +1,6 @@
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import {baseTheme} from "./theme.ts";
-import {ScrollManager} from "./components/misc/ScrollManager.tsx";
-import {HeaderBar} from "./components/header/HeaderBar.tsx";
-import {FooterBar} from "./components/footer";
-import {AppRoutes} from "./routes/AppRoutes.tsx";
+import LandingPage from "./timeline_spike/LandingPage.tsx";
 
 
 function App() {
@@ -11,12 +8,13 @@ function App() {
     return (
         <ThemeProvider theme={baseTheme}>
             <CssBaseline/>
-            <HeaderBar/>
+            {/*<HeaderBar/>*/}
 
-            <ScrollManager/>
-            <AppRoutes/>
+            {/*<ScrollManager/>*/}
+            {/*<AppRoutes/>*/}
 
-            <FooterBar/>
+            {/*<FooterBar/>*/}
+            <LandingPage/>
         </ThemeProvider>
     );
 }

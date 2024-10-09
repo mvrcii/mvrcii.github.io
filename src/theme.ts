@@ -38,14 +38,15 @@ export const baseTheme = createTheme({
     },
     palette: {
         primary: {
-            main: '#fafafa',
+            main: '#fafafa',  // Primary white color for light elements like text
+            dark: '#999999',  // Darkened primary for icons and background elements
         },
         secondary: {
             main: '#dc4823',
         },
         background: {
             default: '#121212',
-            paper: '#333333',
+            paper: '#1c1c1c',
         },
         text: {
             primary: '#fafafa',
@@ -114,8 +115,6 @@ export const baseTheme = createTheme({
                     padding: '0 !important',
                     height: 'inherit',
                     width: 'inherit',
-
-                    // boxShadow: 'rgba(255, 255, 255, 0.35) 0px 25px 20px -30px'
                 },
             },
         },
