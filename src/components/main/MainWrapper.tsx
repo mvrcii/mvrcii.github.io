@@ -1,7 +1,6 @@
 import React from "react";
 import {Box, Container, Typography} from "@mui/material";
 import {Hero} from "./hero/Hero.tsx";
-import {AboutMe} from "./hero/AboutMe.tsx";
 
 
 export function MainWrapper(): React.ReactElement {
@@ -13,10 +12,6 @@ export function MainWrapper(): React.ReactElement {
                 <Typography variant="h1">About me</Typography>
                 <Typography variant="body1">Stay tuned! I'll soon share more about my background, experiences, and the
                     passions that drive my professional journey.</Typography>
-            </Container>
-
-            <Container id="timeline">
-                <AboutMe/>
             </Container>
 
             <Container id="education">

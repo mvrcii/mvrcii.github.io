@@ -5,11 +5,13 @@ import {Cursor, useTypewriter} from "react-simple-typewriter";
 import React, {useEffect, useState} from "react";
 
 const slangToColors: WordColorPair[] = [
-    {text: 'Machine Learning.', color: '#181D7Aff'},
-    {text: 'Computer Vision.', color: '#793144ff'},
-    {text: 'Software Development.', color: '#194A1Cff'},
-    {text: 'AI Safety.', color: '#703524ff'},
-    {text: 'Research.', color: '#3699D5ff'}
+    {text: 'Machine Learning', color: '#181D7Aff'},
+    {text: 'Computer Vision', color: '#793144ff'},
+    {text: 'Software Development', color: '#194A1Cff'},
+    {text: 'AI Safety', color: '#703524ff'},
+    {text: 'Research', color: '#3699D5ff'},
+    {text: 'Data Science', color: '#2F3E46ff'},
+    {text: 'Medical Imaging', color: '#8E44ADff'}
 ];
 
 export const Hero = () => {
@@ -34,9 +36,9 @@ export const Hero = () => {
     return (
         <Container id="hero">
             <StyledBox>
-                <ImageContainer>
+                <HeroBox>
                     <img src={heroImage} alt="Hero Image"/>
-                </ImageContainer>
+                </HeroBox>
                 <TextBox>
                     <TitleText>I'm Marcel Roth</TitleText>
                     <TypewriterHook words={slangToColors}/>
@@ -163,21 +165,25 @@ const StyledBox = styled(Box)(({theme}) => ({
     },
 }));
 
-const ImageContainer = styled(Box)({
-    width: '250px',
-    height: '250px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden', // Ensures nothing spills out if the image is too large
-    '& img': {
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        borderRadius: "50%",
-        border: '2px solid #fafafa',
+const HeroBox = styled(Box)`
+    width: 250px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; // Ensures nothing spills out if the image is too large
+    border-radius: 50%; // Ensure the container itself is circular
+    border: 4px solid #fafafa;
+
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 40% center; // Default center position
+        border-radius: 50%;
+        transition: object-position 0.3s ease; // Smooth transition when changing position
     }
-});
+`;
 
 const TextBox = styled(Box)(({theme}) => ({
     height: '100%',
