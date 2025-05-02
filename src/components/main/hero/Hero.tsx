@@ -3,19 +3,35 @@ import {styled} from "@mui/material/styles";
 import heroImage from '../../../assets/hero.jpg';
 import {Cursor, useTypewriter} from "react-simple-typewriter";
 import React, {useEffect, useState} from "react";
+import {useTheme} from "../../../theme/ThemeContext";
 
-const slangToColors: WordColorPair[] = [
-    {text: 'Machine Learning', color: '#181D7Aff'},
-    {text: 'Computer Vision', color: '#793144ff'},
-    {text: 'Software Development', color: '#194A1Cff'},
-    {text: 'AI Safety', color: '#703524ff'},
-    {text: 'Research', color: '#3699D5ff'},
-    {text: 'Data Science', color: '#2F3E46ff'},
-    {text: 'Medical Imaging', color: '#8E44ADff'}
+// Define separate color palettes for light and dark modes
+const darkModeColors = [
+    {text: 'Machine Learning', color: '#181D7A'},
+    {text: 'Computer Vision', color: '#793144'},
+    {text: 'Software Development', color: '#194A1C'},
+    {text: 'AI Safety', color: '#703524'},
+    {text: 'Research', color: '#3699D5'},
+    {text: 'Data Science', color: '#2F3E46'},
+    {text: 'Medical Imaging', color: '#8E44AD'}
+];
+
+const lightModeColors = [
+    {text: 'Machine Learning', color: '#D7D9FF'},
+    {text: 'Computer Vision', color: '#FFD7E0'},
+    {text: 'Software Development', color: '#D7F0D8'},
+    {text: 'AI Safety', color: '#FCDBD0'},
+    {text: 'Research', color: '#B8E4FF'},
+    {text: 'Data Science', color: '#D8E6E8'},
+    {text: 'Medical Imaging', color: '#EBDAF5'}
 ];
 
 export const Hero = () => {
     const [open, setOpen] = React.useState(false);
+    const {mode} = useTheme();
+
+    // Select the appropriate color palette based on theme
+    const slangToColors = mode === 'light' ? lightModeColors : darkModeColors;
 
     const handleCopyEmail = async () => {
         try {
@@ -88,14 +104,24 @@ export const TitleText = styled(Typography)(({theme}) => ({
     color: theme.palette.text.primary
 }));
 
-const Highlight = styled('u')<{ color: string }>(({color = '#341677'}) => ({
-    textDecoration: 'none',
-    boxShadow: `inset 0 -.5em 0 ${color}`,
-    transition: 'box-shadow .3s ease-out',
-    '&:hover': {
-        boxShadow: 'inset 0 -1em 0 ${color}',
-    }
-}));
+// Apply different text color based on theme and background color
+const Highlight = styled('u')<{ color: string }>(({color, theme}) => {
+    // For light theme, use dark text on light backgrounds
+    // For dark theme, use light text on dark backgrounds
+    const textColor = theme.palette.mode === 'light' ? '#000000' : '#ffffff';
+
+    return {
+        textDecoration: 'none',
+        color: textColor,
+        boxShadow: `inset 0 -.5em 0 ${color}`,
+        transition: 'box-shadow .3s ease-out',
+        padding: '0 4px',
+        borderRadius: '2px',
+        '&:hover': {
+            boxShadow: `inset 0 -1em 0 ${color}`,
+        }
+    };
+});
 
 interface WordColorPair {
     text: string;
@@ -104,10 +130,9 @@ interface WordColorPair {
 
 interface TypewriterHookProps {
     words: WordColorPair[];
-    color?: string;
 }
 
-const TypewriterHook: React.FC<TypewriterHookProps> = ({words, color = '#341677'}) => {
+const TypewriterHook: React.FC<TypewriterHookProps> = ({words}) => {
     const wordsText = words.map((item) => item.text);
     const [currentText, {isType}] = useTypewriter({
         words: wordsText,
@@ -118,7 +143,7 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words, color = '#341677'
         onLoopDone: () => console.log('Loop finished')
     });
 
-    const [currentColor, setCurrentColor] = useState(color); // Initial default color
+    const [currentColor, setCurrentColor] = useState(words[0].color); // Initial default color
     const [lastTypeWord, setLastTypeWord] = useState('');
 
     // When a new word starts being typed, use the color of the word
@@ -131,7 +156,6 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words, color = '#341677'
             }
         }
     }, [currentText, isType, lastTypeWord, words]);
-
 
     const customCursor = (
         <span style={{
@@ -174,7 +198,7 @@ const HeroBox = styled(Box)(({theme}) => ({
     justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: '50%',
-    border: `4px solid ${theme.palette.background.default === '#121212' ? '#fafafa' : '#333333'}`,
+    border: theme.palette.mode === 'dark' ? '4px solid #fafafa' : 'none',
 
     '& img': {
         width: '100%',

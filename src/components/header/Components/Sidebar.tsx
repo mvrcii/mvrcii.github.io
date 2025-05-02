@@ -4,10 +4,7 @@ import React, {useState} from "react";
 import {styled} from "@mui/material/styles";
 import {NavButton} from "./Common/NavButton.tsx";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import AuthorName from "./Common/AuthorName.tsx";
 import buttonsConfig from "../HeaderBar.tsx";
-import {ThemeToggle} from "../../common/ThemeToggle.tsx";
-
 
 export const Sidebar: React.FC = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -27,10 +24,9 @@ export const Sidebar: React.FC = () => {
                 <MenuOutlinedIcon/>
             </IconButton>
 
-            <AuthorName>Portfolio</AuthorName>
-
             <SwipeableDrawer
-                disableBackdropTransition={!iOS} disableDiscovery={iOS}
+                disableBackdropTransition={!iOS}
+                disableDiscovery={iOS}
                 variant="temporary"
                 anchor={'top'}
                 open={isSidebarOpen}
@@ -43,7 +39,6 @@ export const Sidebar: React.FC = () => {
                         <NavButton key={button.sectionId} {...button} onClick={closeSidebar}/>
                     ))}
                     <Box sx={{display: 'flex', alignItems: 'center', marginTop: '1rem'}}>
-                        <ThemeToggle/>
                         <CVButton/>
                     </Box>
                 </DrawerContainer>

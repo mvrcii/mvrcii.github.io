@@ -5,8 +5,8 @@ import React from "react";
 const StyledAuthorName = styled(Typography)(({theme}) => ({
     color: theme.palette.text.primary,
     cursor: 'pointer',
-    flexGrow: 1,
     userSelect: 'none',
+    fontFamily: '"Marcellus", serif',
 }));
 
 interface AuthorNameProps {
