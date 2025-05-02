@@ -39,7 +39,7 @@ export function MainWrapper(): React.ReactElement {
             {/* First section: Hero + About */}
             <SplitSection
                 id="about"
-                ratio={0.5}
+                ratio={0.4}
                 leftContent={
                     <Hero/>
                 }

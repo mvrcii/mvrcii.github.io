@@ -54,7 +54,7 @@ const ProjectCard = styled(Card)(({theme}) => ({
     boxShadow: theme.shadows[4],
     transition: 'transform 0.3s ease, box-shadow 0.3s ease',
     '&:hover': {
-        transform: 'translateY(-8px)',
+        // transform: 'translateY(-8px)',
         boxShadow: theme.shadows[8],
     },
 }));
@@ -108,7 +108,7 @@ const ChallengesSection: React.FC = () => {
     return (
         <HorizontalScrollSection title="Challenges" itemWidth={100} id="challenges">
             {challengesData.map((challenge) => (
-                <Box key={challenge.id} sx={{height: '100%', px: '40px', py: '20px'}}>
+                <Box key={challenge.id} sx={{height: '100%', px: '60px', py: '20px'}}>
                     <ProjectCard>
                         <CardMedia
                             component="img"                 // render an actual <img>

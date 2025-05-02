@@ -12,11 +12,13 @@ const createBaseTheme = (mode: 'light' | 'dark'): Theme => {
                 lineHeight: "90%",
                 fontSize: '3.5rem',
                 marginBottom: '0.5rem',
+                fontFamily: '"Marcellus", serif',
             },
             h2: {
                 fontWeight: 700,
                 fontSize: '2rem',
                 letterSpacing: "-.05em",
+                fontFamily: '"Marcellus", serif',
             },
             h3: {
                 fontWeight: 900,

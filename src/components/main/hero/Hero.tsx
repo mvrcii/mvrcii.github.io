@@ -26,19 +26,11 @@ const lightModeColors = [
     {text: 'Medical Imaging', color: '#EBDAF5'}
 ];
 
-export const HeroImage = () => {
-    return (
-        <HeroBox>
-            <img src={heroImage} alt="Hero"/>
-        </HeroBox>
-    );
-};
-
 
 export const TitleText = styled(Typography)(({theme}) => ({
     fontFamily: '"Marcellus", serif',
     fontWeight: 400,
-    fontSize: '3rem', // Larger font size now that we have more space
+    fontSize: '3rem',
     lineHeight: '4rem',
     color: theme.palette.text.primary,
     [theme.breakpoints.down('md')]: {
@@ -73,10 +65,10 @@ interface WordColorPair {
 interface TypewriterHookProps {
     words: WordColorPair[];
 }
-
-const TypewriterHook: React.FC<TypewriterHookProps> = ({words}) => {
+const TypewriterHook: React.FC<TypewriterHookProps> = ({ words }) => {
+    const { mode } = useTheme(); // Get current theme mode
     const wordsText = words.map((item) => item.text);
-    const [currentText, {isType}] = useTypewriter({
+    const [currentText, { isType }] = useTypewriter({
         words: wordsText,
         loop: true,
         typeSpeed: 50,
@@ -87,7 +79,7 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words}) => {
     const [currentColor, setCurrentColor] = useState(words[0].color);
     const [lastTypeWord, setLastTypeWord] = useState('');
 
-    // When a new word starts being typed, use the color of the word
+    // First effect: Handle typing updates
     useEffect(() => {
         if (isType && currentText.length === 1 && lastTypeWord !== currentText) {
             setLastTypeWord(currentText);
@@ -97,6 +89,19 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words}) => {
             }
         }
     }, [currentText, isType, lastTypeWord, words]);
+
+    // Second effect: Handle theme changes
+    useEffect(() => {
+        // Find the current word being typed
+        const currentWord = wordsText.find(word => word.startsWith(currentText));
+        if (currentWord) {
+            // Get the new color for this word in the current theme
+            const newColor = words.find(item => item.text === currentWord)?.color;
+            if (newColor) {
+                setCurrentColor(newColor);
+            }
+        }
+    }, [mode, words, currentText, wordsText]);
 
     const customCursor = (
         <span style={{
@@ -111,14 +116,15 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words}) => {
         <Box sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'flex-start',
+            alignItems: 'center',
             width: '100%',
+            textAlign: 'center'
         }}>
             <TitleText component="span" sx={{fontSize: '2.25rem', lineHeight: '2.5rem'}}>
                 I am doing
             </TitleText>
 
-            <Box sx={{whiteSpace: 'nowrap'}}>
+            <Box sx={{whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <TitleText component="span" sx={{fontSize: '2.25rem', lineHeight: '2.5rem'}}>
                     <Highlight color={currentColor}>{currentText}</Highlight>
                 </TitleText>
@@ -129,6 +135,18 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words}) => {
 };
 
 
+const HeroContainer = styled(Box)({
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '2rem',
+    paddingLeft: '12rem'
+});
+
+
 const HeroBox = styled(Box)(({theme}) => ({
     width: '250px',
     height: '250px',
@@ -137,8 +155,7 @@ const HeroBox = styled(Box)(({theme}) => ({
     justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: '50%',
-    border: `4px solid ${theme.palette.background.default === '#121212' ? '#fafafa' : '#333333'}`,
-    margin: '0 auto',
+    border: theme.palette.mode === 'dark' ? `4px solid #fafafa` : 'none',
 
     '& img': {
         width: '100%',
@@ -150,20 +167,23 @@ const HeroBox = styled(Box)(({theme}) => ({
     }
 }));
 
+export const HeroImage = () => {
+    return (
+        <HeroBox>
+            <img src={heroImage} alt="Hero"/>
+        </HeroBox>
+    );
+};
+
 
 export const Hero = () => {
     const {mode} = useTheme();
     const slangToColors = mode === 'light' ? lightModeColors : darkModeColors;
 
     return (
-        <Box sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 3
-        }}>
+        <HeroContainer>
             <HeroImage/>
             <TypewriterHook words={slangToColors}/>
-        </Box>
+        </HeroContainer>
     );
 };

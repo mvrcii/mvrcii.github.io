@@ -47,9 +47,11 @@ const AboutSection: React.FC = () => {
       </Paragraph>
 
       <Paragraph variant="body1">
-        I thrive in challenging, complex domains – it feels as natural to me as breathing. I approach research with the mindset that meaningful solutions emerge through persistence, curiosity,
-        and a deep understanding of the problem space.
+        I thrive in challenging, complex domains – it feels as natural to me as breathing.
       </Paragraph>
+
+        <Paragraph variant="body1">I approach research with the mindset that meaningful solutions emerge through persistence, curiosity,
+        and a deep understanding of the problem space.</Paragraph>
 
       <Paragraph variant="body1">
         Some things I’ve learned (the hard way):

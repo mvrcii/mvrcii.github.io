@@ -57,11 +57,19 @@ const NavigationButton = styled(IconButton)(({theme}) => ({
     zIndex: 10,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[3],
+    padding: '4px',
     '&:hover': {
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.primary.contrastText,
+        backgroundColor: theme.palette.secondary.main,
+        '& .MuiSvgIcon-root': {
+            color: '#ffffff',
+        }
     },
+    '& .MuiSvgIcon-root': {
+        color: theme.palette.text.primary,
+        transition: 'color 0.2s ease',
+    }
 }));
+
 
 const DownButton = styled(NavigationButton)({
     bottom: '20px',

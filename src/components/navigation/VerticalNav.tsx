@@ -129,23 +129,33 @@ const NavItem: React.FC<NavItemProps> = ({ label, sectionId, active, expanded, o
 export const VerticalNav: React.FC = () => {
     const [expanded, setExpanded] = useState(false);
     const [activeSection, setActiveSection] = useState('');
-    const [isScrolling, setIsScrolling] = useState(false); // Add this flag
+    const [isScrolling, setIsScrolling] = useState(false);
+    const [isInHorizontalSection, setIsInHorizontalSection] = useState(false);
 
-    // Track mouse position for proximity detection
+    // Detect if we're in a horizontal scroll section
+    useEffect(() => {
+        const challengesSection = document.getElementById('challenges');
+        if (!challengesSection) return;
+
+        const observer = new IntersectionObserver(
+            entries => setIsInHorizontalSection(entries[0].isIntersecting),
+            { threshold: 0.3 }
+        );
+
+        observer.observe(challengesSection);
+        return () => observer.disconnect();
+    }, []);
+
+    // Track mouse position but don't expand in horizontal sections
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
-            // Expand if mouse is within 100px of the left edge
-            const shouldExpand = e.clientX < 100;
-            if (shouldExpand !== expanded) {
-                setExpanded(shouldExpand);
-            }
+            const shouldExpand = e.clientX < 100 && !isInHorizontalSection;
+            if (shouldExpand !== expanded) setExpanded(shouldExpand);
         };
 
         window.addEventListener('mousemove', handleMouseMove);
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, [expanded]);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, [expanded, isInHorizontalSection]);
 
     // Determine active section based on scroll position
     useEffect(() => {
@@ -222,7 +232,7 @@ export const VerticalNav: React.FC = () => {
     return (
         <NavContainer
             expanded={expanded}
-            onMouseEnter={() => setExpanded(true)}
+            onMouseEnter={() => !isInHorizontalSection && setExpanded(true)}
             onMouseLeave={() => setExpanded(false)}
         >
             {buttonsConfig.map(button => (
