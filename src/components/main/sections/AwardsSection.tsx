@@ -60,23 +60,28 @@ const AwardYear = styled(Typography)(({theme}) => ({
 const awardsData = [
     {
         id: 1,
-        title: "Best Paper Award at [Conference Name]",
+        title: "Capsule Vision 2024 Challenge",
         year: "2024"
     },
     {
         id: 2,
-        title: "Research Excellence Grant",
-        year: "2023"
+        title: "Ultimate Jailbreaking Championship",
+        year: "2024"
     },
     {
         id: 3,
-        title: "Open Source Contribution Award",
-        year: "2022"
+        title: "Tierzählstation Challenge",
+        year: "2024"
     },
     {
         id: 4,
-        title: "[University/Company] Innovation Prize",
-        year: "2021"
+        title: "Vesuvius GrandPrize Challenge 2023",
+        year: "2023"
+    },
+    {
+        id: 5,
+        title: "NeurIPS 2023 MedFM Challenge",
+        year: "2023"
     }
 ];
 
