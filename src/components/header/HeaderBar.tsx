@@ -8,6 +8,8 @@ import {Toolbar} from "./Components/Toolbar.tsx";
 
 const buttonsConfig = [
     {label: 'About', sectionId: 'about'},
+    {label: 'Awards', sectionId: 'awards'},
+    {label: 'Publications', sectionId: 'publications'},
     {label: 'Education', sectionId: 'education'},
     {label: 'Challenges', sectionId: 'challenges'},
 ];
