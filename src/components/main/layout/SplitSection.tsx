@@ -1,6 +1,7 @@
+// Updated SplitSection.tsx with flexible ratio support
 import React from 'react';
 import {Box} from '@mui/material';
-import {styled} from '@mui/material/styles';
+import {styled, Theme} from '@mui/material/styles';
 
 interface SplitSectionProps {
     leftContent?: React.ReactNode;
@@ -8,10 +9,11 @@ interface SplitSectionProps {
     reverse?: boolean;
     backgroundColor?: string;
     id?: string;
+    ratio?: number; // New prop: ratio between 0 and 1 representing left:right split
 }
 
 const SectionContainer = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'backgroundColor'
+    shouldForwardProp: (prop) => !['backgroundColor'].includes(prop as string)
 })<{ backgroundColor?: string }>(
     ({theme, backgroundColor}) => ({
         display: 'flex',
@@ -25,8 +27,8 @@ const SectionContainer = styled(Box, {
     })
 );
 
-const ContentSide = styled(Box)(({theme}) => ({
-    flex: 2,
+const ContentSide = styled(Box)<{ flex: number }>(({theme, flex}) => ({
+    flex,
     padding: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
@@ -38,30 +40,23 @@ const ContentSide = styled(Box)(({theme}) => ({
     },
 }));
 
-const MediaSide = styled(Box)(({theme}) => ({
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    [theme.breakpoints.down('md')]: {
-        flex: 'auto',
-        minHeight: '40vh',
-    },
-}));
-
 const SplitSection: React.FC<SplitSectionProps> = ({
                                                        leftContent,
                                                        rightContent,
                                                        reverse = false,
                                                        backgroundColor,
                                                        id,
+                                                       ratio = 1 / 3, // Default to 1/3 : 2/3 split
                                                    }) => {
+    // Calculate the flex values based on the ratio
+    const leftFlex = ratio;
+    const rightFlex = 1 - ratio;
+
     return (
         <SectionContainer
             backgroundColor={backgroundColor}
             id={id}
-            sx={(theme: import('@mui/material/styles').Theme) => ({
+            sx={(theme: Theme) => ({
                 flexDirection: reverse ? 'row-reverse' : 'row',
                 [theme.breakpoints.down('md')]: {
                     flexDirection: 'column',
@@ -70,13 +65,13 @@ const SplitSection: React.FC<SplitSectionProps> = ({
         >
             {reverse ? (
                 <>
-                    <ContentSide>{rightContent}</ContentSide>
-                    <MediaSide>{leftContent}</MediaSide>
+                    <ContentSide flex={rightFlex}>{rightContent}</ContentSide>
+                    <ContentSide flex={leftFlex}>{leftContent}</ContentSide>
                 </>
             ) : (
                 <>
-                    <MediaSide>{leftContent}</MediaSide>
-                    <ContentSide>{rightContent}</ContentSide>
+                    <ContentSide flex={leftFlex}>{leftContent}</ContentSide>
+                    <ContentSide flex={rightFlex}>{rightContent}</ContentSide>
                 </>
             )}
         </SectionContainer>
