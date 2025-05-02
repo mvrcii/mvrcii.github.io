@@ -2,38 +2,36 @@ import React from 'react';
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-const SectionBox = styled(Box)(({ theme }) => ({
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  overflow: 'auto',
-  padding: theme.spacing(4, 0),
-}));
+const SectionBox = styled(Box)({
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    overflow: 'auto',
+});
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
-  marginBottom: theme.spacing(4),
-  fontWeight: 700,
-  position: 'relative',
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    bottom: '-10px',
-    left: '0',
-    width: '60px',
-    height: '4px',
-    backgroundColor: theme.palette.primary.main,
-  },
+    marginBottom: theme.spacing(4),
+    fontWeight: 700,
+    position: 'relative',
+    '&::after': {
+        content: '""',
+        position: 'absolute',
+        bottom: '-10px',
+        left: '0',
+        width: '60px',
+        height: '4px',
+        backgroundColor: theme.palette.primary.main,
+    },
 }));
 
 const Paragraph = styled(Typography)(({ theme }) => ({
-  marginBottom: theme.spacing(2.5),
-  fontSize: '1.1rem',
-  lineHeight: 1.6,
-  maxWidth: '90%',
-  '&:last-child': {
-    marginBottom: 0,
-  },
+    marginBottom: theme.spacing(2.5),
+    fontSize: '1.1rem',
+    lineHeight: 1.6,
+    maxWidth: '100%',
+    '&:last-child': {
+        marginBottom: 0,
+    },
 }));
 
 const AboutSection: React.FC = () => {
@@ -47,12 +45,7 @@ const AboutSection: React.FC = () => {
       </Paragraph>
 
       <Paragraph variant="body1">
-        I thrive in challenging,
-        complex domains – it feels as natural to me as breathing.
-      </Paragraph>
-
-      <Paragraph variant="body1">
-        I approach research with the mindset that meaningful solutions emerge through persistence, curiosity,
+        I thrive in challenging, complex domains – it feels as natural to me as breathing. I approach research with the mindset that meaningful solutions emerge through persistence, curiosity,
         and a deep understanding of the problem space.
       </Paragraph>
 

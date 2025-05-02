@@ -1,4 +1,4 @@
-import {Box, Container, Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import {Cursor, useTypewriter} from "react-simple-typewriter";
 import React, {useEffect, useState} from "react";
@@ -26,32 +26,24 @@ const lightModeColors = [
     {text: 'Medical Imaging', color: '#EBDAF5'}
 ];
 
-export const Hero = () => {
-    const {mode} = useTheme();
-
-    // Select the appropriate color palette based on theme
-    const slangToColors = mode === 'light' ? lightModeColors : darkModeColors;
-
+export const HeroImage = () => {
     return (
-        <Container id="hero">
-            <StyledBox>
-                <HeroBox>
-                    <img src={heroImage} alt="Hero Image"/>
-                </HeroBox>
-                <TextBox>
-                    <TypewriterHook words={slangToColors}/>
-                </TextBox>
-            </StyledBox>
-        </Container>
+        <HeroBox>
+            <img src={heroImage} alt="Hero"/>
+        </HeroBox>
     );
-}
+};
+
 
 export const TitleText = styled(Typography)(({theme}) => ({
     fontFamily: '"Marcellus", serif',
     fontWeight: 400,
-    fontSize: '2.625rem',
+    fontSize: '3rem', // Larger font size now that we have more space
     lineHeight: '4rem',
-    color: theme.palette.text.primary
+    color: theme.palette.text.primary,
+    [theme.breakpoints.down('md')]: {
+        fontSize: '2.5rem',
+    },
 }));
 
 // Apply different text color based on theme and background color
@@ -89,11 +81,10 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words}) => {
         loop: true,
         typeSpeed: 50,
         deleteSpeed: 20,
-        delaySpeed: 1200,
-        onLoopDone: () => console.log('Loop finished')
+        delaySpeed: 1200
     });
 
-    const [currentColor, setCurrentColor] = useState(words[0].color); // Initial default color
+    const [currentColor, setCurrentColor] = useState(words[0].color);
     const [lastTypeWord, setLastTypeWord] = useState('');
 
     // When a new word starts being typed, use the color of the word
@@ -109,7 +100,7 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words}) => {
 
     const customCursor = (
         <span style={{
-            fontSize: '2.25rem',
+            fontSize: '2.5rem',
             top: -5,
             position: "relative",
             animation: 'blink 1s step-start infinite'
@@ -119,43 +110,24 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words}) => {
     return (
         <Box sx={{
             display: 'flex',
-            alignItems: 'center',
-            lineHeight: '3rem',
-            paddingTop: '2rem',
-            width: "290px",
-            maxWidth: "inherit"
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            width: '100%',
         }}>
-            <Box sx={{display: 'flex', flexDirection: 'column'}}>
-                <TitleText component="span" sx={{fontSize: '1.75rem', lineHeight: '2rem'}}>
-                    I am doing
+            <TitleText component="span" sx={{fontSize: '2.25rem', lineHeight: '2.5rem'}}>
+                I am doing
+            </TitleText>
+
+            <Box sx={{whiteSpace: 'nowrap'}}>
+                <TitleText component="span" sx={{fontSize: '2.25rem', lineHeight: '2.5rem'}}>
+                    <Highlight color={currentColor}>{currentText}</Highlight>
                 </TitleText>
-
-                <Box>
-                    <TitleText component="span" sx={{fontSize: '1.75rem', lineHeight: '2rem'}}>
-                        <Highlight color={currentColor}>{currentText}</Highlight>
-                    </TitleText>
-                    <Cursor cursorStyle={customCursor}/>
-
-                </Box>
-
+                <Cursor cursorStyle={customCursor}/>
             </Box>
-
         </Box>
     );
 };
 
-const StyledBox = styled(Box)(({theme}) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    boxSizing: 'border-box',
-    paddingTop: '2rem',
-    flexDirection: 'column',
-    [theme.breakpoints.down('md')]: {
-        flexDirection: 'column',
-    },
-}));
 
 const HeroBox = styled(Box)(({theme}) => ({
     width: '250px',
@@ -166,6 +138,7 @@ const HeroBox = styled(Box)(({theme}) => ({
     overflow: 'hidden',
     borderRadius: '50%',
     border: `4px solid ${theme.palette.background.default === '#121212' ? '#fafafa' : '#333333'}`,
+    margin: '0 auto',
 
     '& img': {
         width: '100%',
@@ -177,17 +150,15 @@ const HeroBox = styled(Box)(({theme}) => ({
     }
 }));
 
-const TextBox = styled(Box)(({theme}) => ({
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    flex: '1',
-    paddingLeft: '0rem',
-    boxSizing: 'border-box',
-    [theme.breakpoints.down('md')]: {
-        paddingLeft: '1rem',
-        paddingTop: '2rem',
-        textAlign: 'center',
-    },
-}));
+
+export const Hero = () => {
+    const {mode} = useTheme();
+    const slangToColors = mode === 'light' ? lightModeColors : darkModeColors;
+
+    return (
+        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3}}>
+            <HeroImage/>
+            <TypewriterHook words={slangToColors}/>
+        </Box>
+    );
+};

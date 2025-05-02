@@ -9,27 +9,7 @@ import AwardsSection from "./sections/AwardsSection";
 import PublicationsSection from "./sections/PublicationsSection";
 import ChallengesSection from "./sections/ChallengesSection";
 import EducationSection from "./sections/EducationSection";
-import { Hero } from "./hero/Hero";
-
-// Styled components for the hero section
-const HeroContainer = styled(Box)(({theme}) => ({
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'relative',
-    padding: theme.spacing(3),
-}));
-
-// const HeroImage = styled('img')({
-//     width: '220px',
-//     height: '220px',
-//     borderRadius: '50%',
-//     objectFit: 'cover',
-//     objectPosition: '40% center',
-//     marginBottom: '2rem',
-// });
+import {Hero} from "./hero/Hero.tsx";
 
 // Component for a full-width section with a centered heading
 const SectionHeader = styled(Typography)(({theme}) => ({
@@ -53,8 +33,8 @@ const SectionHeader = styled(Typography)(({theme}) => ({
 export function MainWrapper(): React.ReactElement {
     return (
         <FullscreenSections
-            widthPercentage={60} // Set width to 75% of viewport
-            heightPercentage={70} // Set height to 75% of viewport
+            widthPercentage={100} // Set width to 75% of viewport
+            heightPercentage={100} // Set height to 75% of viewport
         >
             {/* First section: Hero + About */}
             <SplitSection
