@@ -42,25 +42,29 @@ const AboutSection: React.FC = () => {
       <SectionTitle variant="h2">About Me</SectionTitle>
 
       <Paragraph variant="body1">
-        My name is Marcel Roth, I am a Machine Learning Researcher specialized in Computer Vision
-        and Medical Imaging. I'm currently working on AI Safety and Explainability methods to make
-        neural networks more transparent and trustworthy.
+        My name is Marcel Roth. I'm an M.Sc. student in Computer Science at the Julius-Maximilians-Universität Würzburg,
+        specializing in Machine Learning, Computer Vision, Explainability, and Medical Imaging.
       </Paragraph>
 
       <Paragraph variant="body1">
-        I am also a member of the [Research Group Name] at [University/Company], where we develop
-        innovative approaches to [specific research area]. Our work focuses on bridging the gap
-        between theoretical AI advances and real-world applications.
+        I thrive in challenging,
+        complex domains – it feels as natural to me as breathing.
       </Paragraph>
 
       <Paragraph variant="body1">
-        For the past [time period], I've been working on [current project],
-        which has been a rewarding journey combining technical innovation with practical impact.
+        I approach research with the mindset that meaningful solutions emerge through persistence, curiosity,
+        and a deep understanding of the problem space.
       </Paragraph>
 
       <Paragraph variant="body1">
-        I find it more fruitful to approach problems by thinking outside conventional boundaries
-        and drawing inspiration from diverse fields to create elegant solutions.
+        Some things I’ve learned (the hard way):
+        <ul>
+          <li>Complex problems are best solved in a focused duo.</li>
+          <li>Clear, direct communication is a force multiplier.</li>
+          <li>If your results look weird, check for double sigmoid — I’ve been there.</li>
+          <li>Good architecture can’t fix bad data.</li>
+          <li>Ancient Herculaneum scrolls are smaller than you think.</li>
+        </ul>
       </Paragraph>
     </SectionBox>
   );

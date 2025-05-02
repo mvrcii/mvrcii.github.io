@@ -9,24 +9,20 @@ const StyledAuthorName = styled(Typography)(({theme}) => ({
     fontFamily: '"Marcellus", serif',
     position: 'relative',
     transition: 'color 0.3s ease, text-shadow 0.3s ease',
-    '&:hover': {
-        color: theme.palette.text.primary, // Maintain text color
-        textShadow: `0 0 10px ${theme.palette.secondary.main}80, 0 0 15px ${theme.palette.secondary.main}40`, // More vibrant glow with multiple shadows
-    },
     '&::after': {
         content: '""',
         position: 'absolute',
-        width: '0%',
+        width: '25%',
         height: '2px',
         bottom: '-4px',
         left: '50%',
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.primary.main,
         transform: 'translateX(-50%)',
         transition: 'width 0.3s ease, opacity 0.3s ease',
         opacity: 0,
     },
     '&:hover::after': {
-        width: '100%',
+        width: '125%',
         opacity: 0.9, // More visible underline
     }
 }));

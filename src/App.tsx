@@ -1,6 +1,5 @@
 import {CssBaseline} from "@mui/material";
 import {HeaderBar} from "./components/header/HeaderBar.tsx";
-import {FooterBar} from "./components/footer";
 import {AppRoutes} from "./routes/AppRoutes.tsx";
 import {VerticalNav} from "./components/navigation/VerticalNav.tsx";
 import {useEffect} from "react";
@@ -46,7 +45,7 @@ function App() {
             <HeaderBar/>
             <VerticalNav/>
             <AppRoutes/>
-            <FooterBar/>
+            {/*<FooterBar/>*/}
         </ThemeProvider>
     );
 }

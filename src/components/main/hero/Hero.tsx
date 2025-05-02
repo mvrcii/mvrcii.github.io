@@ -1,9 +1,9 @@
-import {Alert, Box, Button, Container, Snackbar, Typography} from "@mui/material";
+import {Box, Container, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
-import heroImage from '../../../assets/hero.jpg';
 import {Cursor, useTypewriter} from "react-simple-typewriter";
 import React, {useEffect, useState} from "react";
 import {useTheme} from "../../../theme/ThemeContext";
+import heroImage from '../../../assets/hero.jpg';
 
 // Define separate color palettes for light and dark modes
 const darkModeColors = [
@@ -27,27 +27,10 @@ const lightModeColors = [
 ];
 
 export const Hero = () => {
-    const [open, setOpen] = React.useState(false);
     const {mode} = useTheme();
 
     // Select the appropriate color palette based on theme
     const slangToColors = mode === 'light' ? lightModeColors : darkModeColors;
-
-    const handleCopyEmail = async () => {
-        try {
-            await navigator.clipboard.writeText('marcelroth100@aol.com');
-            setOpen(true);
-        } catch (err) {
-            console.error('Failed to copy: ', err);
-        }
-    };
-
-    const handleClose = (_event?: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
-    };
 
     return (
         <Container id="hero">
@@ -56,45 +39,12 @@ export const Hero = () => {
                     <img src={heroImage} alt="Hero Image"/>
                 </HeroBox>
                 <TextBox>
-                    <TitleText>I'm Marcel Roth</TitleText>
                     <TypewriterHook words={slangToColors}/>
-                    <Box sx={{margin: '18px 0 32px 0'}}>
-                        <a href="https://www.linkedin.com/in/mvrcelroth/" target="_blank" rel="noopener noreferrer">
-                            <StyledButton>LinkedIn</StyledButton>
-                        </a>
-                        <a href="https://github.com/mvrcii" target="_blank" rel="noopener noreferrer">
-                            <StyledButton>GitHub</StyledButton>
-                        </a>
-                        <StyledButton component="span" onClick={handleCopyEmail}>Mail</StyledButton>
-                    </Box>
                 </TextBox>
             </StyledBox>
-
-            <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}
-                      anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}>
-                <Alert onClose={handleClose} severity="success" sx={{width: '100%'}}>
-                    Email address copied to clipboard!
-                </Alert>
-            </Snackbar>
         </Container>
     );
 }
-
-const StyledButton = styled(Button)(({theme}) => ({
-    fontSize: '1rem',
-    borderRadius: '1rem',
-    border: `2px solid ${theme.palette.primary.main}`,
-    color: theme.palette.primary.main,
-    backgroundColor: theme.palette.background.default,
-    boxShadow: 'none',
-    padding: '5px 20px',
-    marginRight: '1rem',
-    transition: '20ms ease-out',
-    '&:hover': {
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.background.default,
-    }
-}));
 
 export const TitleText = styled(Typography)(({theme}) => ({
     fontFamily: '"Marcellus", serif',
@@ -159,7 +109,7 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words}) => {
 
     const customCursor = (
         <span style={{
-            fontSize: '3rem',
+            fontSize: '2.25rem',
             top: -5,
             position: "relative",
             animation: 'blink 1s step-start infinite'
@@ -168,13 +118,28 @@ const TypewriterHook: React.FC<TypewriterHookProps> = ({words}) => {
 
     return (
         <Box sx={{
-            display: 'flex', alignItems: 'center', lineHeight: '3rem',
-            margin: "-.5rem 0 0"
+            display: 'flex',
+            alignItems: 'center',
+            lineHeight: '3rem',
+            paddingTop: '2rem',
+            width: "290px",
+            maxWidth: "inherit"
         }}>
-            <TitleText component="span" sx={{fontSize: '2rem', lineHeight: '3rem'}}>
-                I am doing <Highlight color={currentColor}>{currentText}</Highlight>
-            </TitleText>
-            <Cursor cursorStyle={customCursor}/>
+            <Box sx={{display: 'flex', flexDirection: 'column'}}>
+                <TitleText component="span" sx={{fontSize: '1.75rem', lineHeight: '2rem'}}>
+                    I am doing
+                </TitleText>
+
+                <Box>
+                    <TitleText component="span" sx={{fontSize: '1.75rem', lineHeight: '2rem'}}>
+                        <Highlight color={currentColor}>{currentText}</Highlight>
+                    </TitleText>
+                    <Cursor cursorStyle={customCursor}/>
+
+                </Box>
+
+            </Box>
+
         </Box>
     );
 };
@@ -185,6 +150,8 @@ const StyledBox = styled(Box)(({theme}) => ({
     justifyContent: 'center',
     width: '100%',
     boxSizing: 'border-box',
+    paddingTop: '2rem',
+    flexDirection: 'column',
     [theme.breakpoints.down('md')]: {
         flexDirection: 'column',
     },
@@ -198,7 +165,7 @@ const HeroBox = styled(Box)(({theme}) => ({
     justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: '50%',
-    border: theme.palette.mode === 'dark' ? '4px solid #fafafa' : 'none',
+    border: `4px solid ${theme.palette.background.default === '#121212' ? '#fafafa' : '#333333'}`,
 
     '& img': {
         width: '100%',
@@ -216,7 +183,7 @@ const TextBox = styled(Box)(({theme}) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     flex: '1',
-    paddingLeft: '3rem',
+    paddingLeft: '0rem',
     boxSizing: 'border-box',
     [theme.breakpoints.down('md')]: {
         paddingLeft: '1rem',

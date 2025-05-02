@@ -16,8 +16,11 @@ export function FooterBar(): React.ReactElement {
 
 const FooterBox = styled(Box)(({theme}) => ({
     backgroundColor: theme.palette.primary.main,
-    position: 'relative',
-    flexShrink: 0,
+    position: 'fixed', // Change from 'relative' to 'fixed'
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    zIndex: 100, // Ensure it appears above other content
     height: '120px',
 }));
 

@@ -1,42 +1,48 @@
+// src/components/sections/ChallengesSection.tsx
 import React from 'react';
 import {Box, Card, CardContent, CardMedia, Chip, Typography} from '@mui/material';
 import {styled} from '@mui/material/styles';
 import HorizontalScrollSection from '../layout/HorizontalScrollSection';
+import herzRadar from '../../../assets/herzRadar.png';
 
 // Sample data for challenges/projects
 const challengesData = [
     {
         id: 1,
-        title: 'AI Vision Challenge',
-        description: 'Developed a computer vision model to detect objects in real-time with 95% accuracy.',
-        image: '/path/to/challenge1.jpg', // Replace with actual path
+        title: 'Healthcare Hackathon Würzburg',
+        description:
+            'Developed a web app that uses voice biomarkers to monitor cardiac deterioration and severe heart failure in 3 days.',
+        image: herzRadar,
         technologies: ['TensorFlow', 'Python', 'OpenCV'],
-        date: '2024'
+        date: '2024',
     },
     {
         id: 2,
         title: 'Medical Imaging Project',
-        description: 'Created an AI-powered diagnostic tool to assist radiologists in early disease detection.',
-        image: '/path/to/challenge2.jpg', // Replace with actual path
+        description:
+            'Created an AI-powered diagnostic tool to assist radiologists in early disease detection.',
+        image: '/path/to/challenge2.jpg', // Replace with actual path or import
         technologies: ['PyTorch', 'React', 'FastAPI'],
-        date: '2023'
+        date: '2023',
     },
     {
         id: 3,
         title: 'ML Explainability Research',
-        description: 'Researched and implemented novel approaches to make black-box neural networks more transparent.',
-        image: '/path/to/challenge3.jpg', // Replace with actual path
+        description:
+            'Researched and implemented novel approaches to make black-box neural networks more transparent.',
+        image: '/path/to/challenge3.jpg',
         technologies: ['SHAP', 'LIME', 'Python'],
-        date: '2023'
+        date: '2023',
     },
     {
         id: 4,
         title: 'Self-Supervised Learning Framework',
-        description: 'Built a framework for training models on unlabeled data, reducing annotation requirements by 70%.',
-        image: '/path/to/challenge4.jpg', // Replace with actual path
+        description:
+            'Built a framework for training models on unlabeled data, reducing annotation requirements by 70%.',
+        image: '/path/to/challenge4.jpg',
         technologies: ['PyTorch', 'BYOL', 'SimCLR'],
-        date: '2022'
-    }
+        date: '2022',
+    },
 ];
 
 const ProjectCard = styled(Card)(({theme}) => ({
@@ -53,20 +59,12 @@ const ProjectCard = styled(Card)(({theme}) => ({
     },
 }));
 
-const CardImageWrapper = styled(Box)({
-    position: 'relative',
-    paddingTop: '56.25%', // 16:9 aspect ratio
-    overflow: 'hidden',
-});
-
-const StyledCardMedia = styled(CardMedia)({
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-});
+const StyledCardContent = styled(CardContent)(({theme}) => ({
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: theme.spacing(2),
+}));
 
 const ProjectTitle = styled(Typography)(({theme}) => ({
     fontWeight: 600,
@@ -91,48 +89,46 @@ const TagsContainer = styled(Box)(({theme}) => ({
 }));
 
 const StyledChip = styled(Chip)(({theme}) => ({
-    backgroundColor: theme.palette.primary.main + '20', // Semi-transparent primary color
+    backgroundColor: theme.palette.primary.main + '20',
     color: theme.palette.primary.main,
     fontWeight: 500,
     fontSize: '0.75rem',
 }));
 
+
 const ChallengesSection: React.FC = () => {
-    // Use a placeholder image if no image is provided
-    const getImageSrc = (imagePath: string) => {
-        // If it's a full URL or a valid path, use it
-        if (imagePath.startsWith('http') || imagePath.startsWith('/')) {
-            return imagePath;
-        }
-        // Otherwise use a placeholder
-        return 'https://via.placeholder.com/400x225';
-    };
+    // fallback placeholder if path isn’t valid
+    const getImageSrc = (imagePath: string) =>
+        imagePath.startsWith('http') ||
+        imagePath.startsWith('/') ||
+        imagePath.startsWith('../')
+            ? imagePath
+            : 'https://via.placeholder.com/400x225';
 
     return (
-        <HorizontalScrollSection
-            title="Challenges & Projects"
-            itemWidth={80} // Each item takes 80% of the container width
-            id="challenges"
-        >
+        <HorizontalScrollSection title="Challenges" itemWidth={100} id="challenges">
             {challengesData.map((challenge) => (
-                <Box key={challenge.id} sx={{height: '100%', padding: '20px'}}>
+                <Box key={challenge.id} sx={{height: '100%', px: '40px', py: '20px'}}>
                     <ProjectCard>
-                        <CardImageWrapper>
-                            <StyledCardMedia
-                                image={getImageSrc(challenge.image)}
-                                title={challenge.title}
-                            />
-                        </CardImageWrapper>
-                        <CardContent sx={{flexGrow: 1, display: 'flex', flexDirection: 'column'}}>
+                        <CardMedia
+                            component="img"                 // render an actual <img>
+                            height="225"                    // lock height to 200px
+                            src={getImageSrc(challenge.image)} // your imported URL or fallback
+                            alt={challenge.title}
+                            sx={{objectFit: 'cover'}}     // crop behavior
+                        />
+                        <StyledCardContent>
                             <ProjectTitle variant="h5">{challenge.title}</ProjectTitle>
                             <ProjectDate variant="subtitle2">{challenge.date}</ProjectDate>
-                            <ProjectDescription variant="body2">{challenge.description}</ProjectDescription>
+                            <ProjectDescription variant="body2">
+                                {challenge.description}
+                            </ProjectDescription>
                             <TagsContainer>
-                                {challenge.technologies.map((tech, index) => (
-                                    <StyledChip key={index} label={tech} size="small"/>
+                                {challenge.technologies.map((tech, i) => (
+                                    <StyledChip key={i} label={tech} size="small"/>
                                 ))}
                             </TagsContainer>
-                        </CardContent>
+                        </StyledCardContent>
                     </ProjectCard>
                 </Box>
             ))}
