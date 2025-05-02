@@ -156,7 +156,12 @@ export const Hero = () => {
     const slangToColors = mode === 'light' ? lightModeColors : darkModeColors;
 
     return (
-        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3}}>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 3
+        }}>
             <HeroImage/>
             <TypewriterHook words={slangToColors}/>
         </Box>

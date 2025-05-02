@@ -7,6 +7,8 @@ const SectionBox = styled(Box)({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     overflow: 'auto',
+    maxWidth: '60%',
+    textAlign: 'justify'
 });
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
