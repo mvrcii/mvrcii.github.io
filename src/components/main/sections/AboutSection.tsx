@@ -1,19 +1,45 @@
 import React from 'react';
-import { Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-const SectionContainer = styled(Container)(({ theme }) => ({
-  marginBottom: theme.spacing(8),
+const SectionBox = styled(Box)(({ theme }) => ({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  overflow: 'auto',
+  padding: theme.spacing(4, 0),
+}));
+
+const SectionTitle = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(4),
+  fontWeight: 700,
+  position: 'relative',
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    bottom: '-10px',
+    left: '0',
+    width: '60px',
+    height: '4px',
+    backgroundColor: theme.palette.primary.main,
+  },
 }));
 
 const Paragraph = styled(Typography)(({ theme }) => ({
-  marginBottom: theme.spacing(2),
+  marginBottom: theme.spacing(2.5),
+  fontSize: '1.1rem',
+  lineHeight: 1.6,
+  maxWidth: '90%',
+  '&:last-child': {
+    marginBottom: 0,
+  },
 }));
 
 const AboutSection: React.FC = () => {
   return (
-    <SectionContainer id="about">
-      <Typography variant="h1" gutterBottom>About Me</Typography>
+    <SectionBox>
+      <SectionTitle variant="h2">About Me</SectionTitle>
 
       <Paragraph variant="body1">
         My name is Marcel Roth, I am a Machine Learning Researcher specialized in Computer Vision
@@ -36,7 +62,7 @@ const AboutSection: React.FC = () => {
         I find it more fruitful to approach problems by thinking outside conventional boundaries
         and drawing inspiration from diverse fields to create elegant solutions.
       </Paragraph>
-    </SectionContainer>
+    </SectionBox>
   );
 };
 

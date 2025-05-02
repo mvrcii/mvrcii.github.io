@@ -1,10 +1,35 @@
 import React from 'react';
-import {Box, Container, Link, Paper, Typography} from "@mui/material";
+import {Box, Link, Paper, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import ArticleIcon from '@mui/icons-material/Article';
 
-const SectionContainer = styled(Container)(({theme}) => ({
-    marginBottom: theme.spacing(8),
+const SectionBox = styled(Box)(({theme}) => ({
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    overflow: 'auto',
+    padding: theme.spacing(4, 0),
+}));
+
+const SectionTitle = styled(Typography)(({theme}) => ({
+    marginBottom: theme.spacing(4),
+    fontWeight: 700,
+    position: 'relative',
+    '&::after': {
+        content: '""',
+        position: 'absolute',
+        bottom: '-10px',
+        left: '0',
+        width: '60px',
+        height: '4px',
+        backgroundColor: theme.palette.primary.main,
+    },
+}));
+
+const PublicationsContainer = styled(Box)(() => ({
+    overflow: 'auto',
+    maxHeight: 'calc(100% - 100px)', // Adjust based on title height
 }));
 
 const PublicationItem = styled(Paper)(({theme}) => ({
@@ -67,36 +92,38 @@ const publicationsData = [
 
 const PublicationsSection: React.FC = () => {
     return (
-        <SectionContainer id="publications">
-            <Typography variant="h1" gutterBottom>Publications</Typography>
+        <SectionBox>
+            <SectionTitle variant="h2">Publications</SectionTitle>
 
-            {publicationsData.map((pub) => (
-                <PublicationItem key={pub.id} elevation={0}>
-                    <IconWrapper>
-                        <ArticleIcon fontSize="large"/>
-                    </IconWrapper>
-                    <Box>
-                        <PublicationTitle variant="h6">
-                            <Link href={pub.link} target="_blank" rel="noopener noreferrer" underline="hover">
-                                {pub.title}
-                            </Link>
-                        </PublicationTitle>
+            <PublicationsContainer>
+                {publicationsData.map((pub) => (
+                    <PublicationItem key={pub.id} elevation={0}>
+                        <IconWrapper>
+                            <ArticleIcon fontSize="large"/>
+                        </IconWrapper>
+                        <Box>
+                            <PublicationTitle variant="h6">
+                                <Link href={pub.link} target="_blank" rel="noopener noreferrer" underline="hover">
+                                    {pub.title}
+                                </Link>
+                            </PublicationTitle>
 
-                        <PublicationAuthors variant="body2">
-                            {pub.authors}
-                        </PublicationAuthors>
+                            <PublicationAuthors variant="body2">
+                                {pub.authors}
+                            </PublicationAuthors>
 
-                        <PublicationVenue variant="body2">
-                            {pub.venue}
-                        </PublicationVenue>
+                            <PublicationVenue variant="body2">
+                                {pub.venue}
+                            </PublicationVenue>
 
-                        <Typography variant="body2">
-                            {pub.abstract}
-                        </Typography>
-                    </Box>
-                </PublicationItem>
-            ))}
-        </SectionContainer>
+                            <Typography variant="body2">
+                                {pub.abstract}
+                            </Typography>
+                        </Box>
+                    </PublicationItem>
+                ))}
+            </PublicationsContainer>
+        </SectionBox>
     );
 };
 

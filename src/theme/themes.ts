@@ -12,7 +12,6 @@ const createBaseTheme = (mode: 'light' | 'dark'): Theme => {
                 lineHeight: "90%",
                 fontSize: '3.5rem',
                 marginBottom: '0.5rem',
-                paddingTop: '1rem'
             },
             h2: {
                 fontWeight: 700,
@@ -77,25 +76,35 @@ const createBaseTheme = (mode: 'light' | 'dark'): Theme => {
         },
         components: {
             MuiCssBaseline: {
-                styleOverrides: {
-                    'html, body, #root': {
-                        height: '100%',
-                        width: '100%',
-                        margin: 0,
-                        padding: 0,
-                        display: 'flex',
-                        flexDirection: 'column',
-                    },
-                    body: {
-                        minHeight: '100vh',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                    },
-                    '#root': {
-                        flex: '1 0 auto',
-                        overflow: 'auto',
-                    }
-                },
+                styleOverrides: `
+          html, body, #root {
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+          }
+          
+          body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+          }
+          
+          #root {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+          }
+          
+          main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+          }
+        `,
             },
             MuiButton: {
                 styleOverrides: {
@@ -123,11 +132,13 @@ const createBaseTheme = (mode: 'light' | 'dark'): Theme => {
                 styleOverrides: {
                     root: {
                         flexShrink: 0,
-                        height: 100,
+                        height: headerSize,
                         width: '100%',
-                        maxWidth: '62.5rem !important',
-                        padding: '0 2.5rem !important',
-                        margin: '0 auto 4rem',
+                        maxWidth: '100vw !important',  // Updated to take full width
+                        padding: '0 1.5rem !important', // Adjusted padding
+                        marginBottom: 0, // Remove bottom margin
+                        position: 'fixed', // Make the header fixed
+                        zIndex: 1100, // Ensure it stays above content
                     }
                 }
             },
@@ -143,10 +154,10 @@ const createBaseTheme = (mode: 'light' | 'dark'): Theme => {
             MuiContainer: {
                 styleOverrides: {
                     root: {
-                        maxWidth: '62.5rem !important',
-                        padding: '0 2.5rem !important',
-                        margin: '0 auto 8rem',
-                        scrollMargin: `${headerSize}px`
+                        maxWidth: '100% !important', // Full width containers
+                        height: '100%',
+                        padding: '0 1.5rem !important',
+                        margin: 0,
                     },
                 },
             },
@@ -157,40 +168,7 @@ const createBaseTheme = (mode: 'light' | 'dark'): Theme => {
                         fontSize: '2rem',
                     },
                 },
-            },
-            MuiSnackbar: {
-                styleOverrides: {
-                    root: {
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }
-                }
-            },
-            MuiAlert: {
-                styleOverrides: {
-                    root: {
-                        backgroundColor: mode === 'light' ? '#f5f5f5' : '#333333',
-                        color: mode === 'light' ? '#121212' : '#fafafa',
-                        alignItems: 'center',
-                        display: 'flex',
-                        justifyContent: 'center'
-                    },
-                    message: {
-                        color: mode === 'light' ? '#121212' : '#fafafa',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    },
-                    action: {
-                        color: mode === 'light' ? '#121212' : '#fafafa',
-                        display: 'flex',
-                        alignItems: 'center',
-                        padding: '7px 0 7px 0',
-                        marginLeft: '12px',
-                    }
-                }
-            },
+            }
         }
     });
 };

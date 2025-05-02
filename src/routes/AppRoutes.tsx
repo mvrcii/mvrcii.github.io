@@ -13,13 +13,12 @@ export function Slot() {
 }
 
 const StyledBox = styled(Box)({
-    flexGrow: 1,  // Allows main to expand and fill space
+    flexGrow: 1,
     flex: '1 0 auto',
-    overflow: 'auto',  // Allows scrolling within the main content
-    marginTop: '2rem',
-    // Offset for scrollIntoView navigation to account for sticky header
-    // 2rem for main´s top margin, 6.25rem for header height, 4rem for header bottom margin
-    scrollMargin: 'calc(2rem + 6.25rem + 4rem)'
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden', // Changed from 'auto' to 'hidden'
+    paddingTop: '100px', // Add space for the fixed header - same as header height
 });
 
 export function AppRoutes() {
@@ -32,6 +31,5 @@ export function AppRoutes() {
                 </Route>
             </Routes>
         </BrowserRouter>
-
     );
 }
