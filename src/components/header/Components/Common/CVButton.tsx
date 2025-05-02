@@ -6,7 +6,7 @@ export function CVButton() {
     return (
         <a href={resume} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none'}}>
             <StyledCVButton variant="contained" color="primary">
-                Resume
+                CV
             </StyledCVButton>
         </a>
     );

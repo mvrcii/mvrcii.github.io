@@ -9,7 +9,7 @@ export const Toolbar: React.FC = () => {
 
     return (
         <Hidden mdDown>
-            <AuthorName>Portfolio</AuthorName>
+            <AuthorName>Marcel Roth</AuthorName>
             <Box>
                 {buttonsConfig.map(button => (
                     <NavButton key={button.sectionId} {...button} />
