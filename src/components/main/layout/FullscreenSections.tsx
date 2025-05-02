@@ -41,7 +41,6 @@ const ContentContainer = styled(Box, {
     height: `${heightPercentage}%`,
     width: `${widthPercentage}%`,
     display: 'flex',
-    borderRadius: theme.spacing(2),
     boxShadow: theme.shadows[3],
     background: theme.palette.background.paper,
     overflow: 'hidden',

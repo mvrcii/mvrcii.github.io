@@ -38,7 +38,8 @@ export function MainWrapper(): React.ReactElement {
         >
             {/* First section: Hero + About */}
             <SplitSection
-                id="home"
+                id="about"
+                ratio={0.5}
                 leftContent={
                     <Hero/>
                 }
@@ -98,6 +99,7 @@ export function MainWrapper(): React.ReactElement {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
+                            padding: 0
                         }}
                     >
                         <Typography variant="h2"

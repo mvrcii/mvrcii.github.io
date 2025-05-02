@@ -1,84 +1,239 @@
-import React from "react";
-import {Box, Button, Hidden} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {Box, Tooltip} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import buttonsConfig from "../header/HeaderBar.tsx";
+import PersonIcon from '@mui/icons-material/Person';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import SchoolIcon from '@mui/icons-material/School';
+import ExtensionIcon from '@mui/icons-material/Extension';
 
-interface NavItemProps {
-    label: string;
-    sectionId: string;
-}
-
-const NavItem: React.FC<NavItemProps> = ({label, sectionId}) => {
-    const handleNavigation = () => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-            section.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-            // Updates URL without causing a scroll
-            window.history.pushState(null, "", `#${sectionId}`);
-        }
-    };
-
-    return (
-        <NavButton onClick={handleNavigation}>
-            {label}
-        </NavButton>
-    );
+// Map section IDs to icons
+const sectionIcons: Record<string, React.ReactNode> = {
+    'about': <PersonIcon/>,
+    'awards': <EmojiEventsIcon/>,
+    'publications': <MenuBookIcon/>,
+    'education': <SchoolIcon/>,
+    'challenges': <ExtensionIcon/>,
 };
 
-export const VerticalNav: React.FC = () => {
-    return (
-        <Hidden smDown>
-            <NavContainer>
-                {buttonsConfig.map(button => (
-                    <NavItem key={button.sectionId} {...button} />
-                ))}
-            </NavContainer>
-        </Hidden>
-    );
-};
-
-const NavContainer = styled(Box)(({theme}) => ({
+const NavContainer = styled(Box, {
+    shouldForwardProp: (prop) => !['expanded'].includes(prop as string)
+})<{ expanded: boolean }>(({theme, expanded}) => ({
     position: 'fixed',
-    left: '2rem',
+    left: 0,
     top: '50%',
     transform: 'translateY(-50%)',
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem',
+    gap: '0.75rem',
     zIndex: 10,
-    padding: '1rem',
-    backgroundColor: 'rgba(0, 0, 0, 0.03)',
-    borderRadius: '8px',
-    boxShadow: theme.palette.mode === 'light'
-        ? '0 2px 10px rgba(0, 0, 0, 0.05)'
-        : '0 2px 10px rgba(255, 255, 255, 0.05)',
-    backdropFilter: 'blur(5px)',
-    WebkitBackdropFilter: 'blur(5px)',
+    padding: expanded ? '0.5rem' : '0.25rem',
+    backgroundColor: theme.palette.mode === 'light'
+        ? 'rgba(250, 250, 250, 0.9)'
+        : 'rgba(18, 18, 18, 0.9)',
+    borderRadius: '0 8px 8px 0',
+    boxShadow: theme.shadows[3],
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)',
+    transition: 'all 0.3s ease',
+    width: expanded ? '160px' : '48px', // Ensure enough width for icon + indicator
     [theme.breakpoints.down('md')]: {
         display: 'none',
     },
 }));
 
-const NavButton = styled(Button)(({theme}) => ({
-    padding: '0.5rem 0.75rem',
-    minWidth: 'unset',
-    textAlign: 'left',
-    justifyContent: 'flex-start',
-    color: theme.palette.text.primary,
-    fontSize: '0.9rem',
-    fontWeight: 500,
-    letterSpacing: '0.5px',
+// Item container for each nav item
+const NavItemContainer = styled(Box, {
+    shouldForwardProp: (prop) => !['active', 'expanded'].includes(prop as string)
+})<{ active: boolean; expanded: boolean }>(({theme, active, expanded}) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0.5rem',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    backgroundColor: active
+        ? theme.palette.mode === 'light'
+            ? 'rgba(0, 0, 0, 0.05)'
+            : 'rgba(255, 255, 255, 0.05)'
+        : 'transparent',
     transition: 'all 0.2s ease',
-    backgroundColor: 'transparent',
-    position: 'relative',
-    borderLeft: `2px solid ${theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)'}`,
-    borderRadius: '0 4px 4px 0',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    justifyContent: expanded ? 'flex-start' : 'center',
+    // Keep the left border visible in both states
+    borderLeft: `3px solid ${active ? theme.palette.secondary.main : 'transparent'}`,
     '&:hover': {
-        backgroundColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)',
-        borderLeft: `2px solid ${theme.palette.primary.main}`,
-        color: theme.palette.primary.main,
+        backgroundColor: theme.palette.mode === 'light'
+            ? 'rgba(0, 0, 0, 0.08)'
+            : 'rgba(255, 255, 255, 0.08)',
+        borderLeft: `3px solid ${theme.palette.secondary.main}`,
     },
 }));
+
+// Icon container
+const IconContainer = styled(Box, {
+    shouldForwardProp: (prop) => !['active', 'expanded'].includes(prop as string)
+})<{ active: boolean; expanded: boolean }>(({ theme, active }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 6,
+    minWidth: '24px',
+    '& .MuiSvgIcon-root': {
+        fontSize: '1.25rem',
+        // When not expanded and active, ensure icon is secondary color
+        fill: active ? theme.palette.secondary.main : theme.palette.text.primary,
+        transition: 'color 0.3s ease',
+    },
+}));
+
+// Label for the nav item
+const NavLabel = styled(Box, {
+    shouldForwardProp: (prop) => !['active', 'expanded'].includes(prop as string)
+})<{ active: boolean; expanded: boolean }>(({theme, active, expanded}) => ({
+    marginLeft: '0.5rem',
+    fontWeight: 500,
+    fontSize: '0.9rem',
+    opacity: expanded ? 1 : 0,
+    maxWidth: expanded ? '120px' : '0',
+    visibility: expanded ? 'visible' : 'hidden',
+    transform: expanded ? 'translateX(0)' : 'translateX(10px)',
+    transition: 'all 0.3s ease',
+    color: active ? theme.palette.secondary.main : theme.palette.text.primary,
+}));
+
+interface NavItemProps {
+    label: string;
+    sectionId: string;
+    active: boolean;
+    expanded: boolean;
+    onClick: () => void;
+}
+
+const NavItem: React.FC<NavItemProps> = ({ label, sectionId, active, expanded, onClick }) => {
+    return (
+        <Tooltip title={expanded ? '' : label} placement="right">
+            <NavItemContainer active={active} expanded={expanded} onClick={onClick}>
+                <IconContainer active={active} expanded={expanded}>
+                    {sectionIcons[sectionId] || <Box sx={{ width: 24, height: 24 }} />}
+                </IconContainer>
+                <NavLabel active={active} expanded={expanded}>
+                    {label}
+                </NavLabel>
+            </NavItemContainer>
+        </Tooltip>
+    );
+};
+
+export const VerticalNav: React.FC = () => {
+    const [expanded, setExpanded] = useState(false);
+    const [activeSection, setActiveSection] = useState('');
+    const [isScrolling, setIsScrolling] = useState(false); // Add this flag
+
+    // Track mouse position for proximity detection
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            // Expand if mouse is within 100px of the left edge
+            const shouldExpand = e.clientX < 100;
+            if (shouldExpand !== expanded) {
+                setExpanded(shouldExpand);
+            }
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+        };
+    }, [expanded]);
+
+    // Determine active section based on scroll position
+    useEffect(() => {
+        const handleScroll = () => {
+            // Skip scroll updates if we're currently in a programmatic scroll
+            if (isScrolling) return;
+
+            const sectionsContainer = document.querySelector("[id^='section-']")?.parentElement;
+            if (!sectionsContainer) return;
+
+            const sectionElements = buttonsConfig.map(button =>
+                document.getElementById(button.sectionId)
+            ).filter(Boolean) as HTMLElement[];
+
+            if (sectionElements.length === 0) return;
+
+            // Get the visible section that's closest to the top of the viewport
+            const viewportHeight = window.innerHeight;
+            const screenMiddle = viewportHeight / 2;
+
+            let closestSection = sectionElements[0];
+            let closestDistance = Math.abs(closestSection.getBoundingClientRect().top - screenMiddle);
+
+            sectionElements.forEach(section => {
+                const distance = Math.abs(section.getBoundingClientRect().top - screenMiddle);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestSection = section;
+                }
+            });
+
+            setActiveSection(closestSection.id);
+        };
+
+        // Initial check
+        handleScroll();
+
+        const sectionsContainer = document.querySelector("[id^='section-']")?.parentElement;
+        if (sectionsContainer) {
+            sectionsContainer.addEventListener('scroll', handleScroll);
+            return () => {
+                sectionsContainer.removeEventListener('scroll', handleScroll);
+            };
+        }
+
+        return undefined;
+    }, [isScrolling]); // Add isScrolling as a dependency
+
+    const handleNavigation = (sectionId: string) => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            // Set active section immediately
+            setActiveSection(sectionId);
+
+            // Set scrolling flag to prevent flicker
+            setIsScrolling(true);
+
+            // Perform smooth scroll
+            section.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            // Updates URL without causing a scroll
+            window.history.pushState(null, "", `#${sectionId}`);
+
+            // Reset scrolling flag after animation completes (approx 1 second)
+            setTimeout(() => {
+                setIsScrolling(false);
+            }, 1000);
+        }
+    };
+
+    return (
+        <NavContainer
+            expanded={expanded}
+            onMouseEnter={() => setExpanded(true)}
+            onMouseLeave={() => setExpanded(false)}
+        >
+            {buttonsConfig.map(button => (
+                <NavItem
+                    key={button.sectionId}
+                    {...button}
+                    active={activeSection === button.sectionId}
+                    expanded={expanded}
+                    onClick={() => handleNavigation(button.sectionId)}
+                />
+            ))}
+        </NavContainer>
+    );
+};
