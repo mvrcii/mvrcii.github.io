@@ -1,13 +1,11 @@
-import {CssBaseline, ThemeProvider} from "@mui/material";
-import {baseTheme} from "./theme.ts";
+import {CssBaseline} from "@mui/material";
 import {HeaderBar} from "./components/header/HeaderBar.tsx";
 import {FooterBar} from "./components/footer";
 import {AppRoutes} from "./routes/AppRoutes.tsx";
 import {useEffect} from "react";
-
+import {ThemeProvider} from "./theme/ThemeContext";
 
 function App() {
-
     useEffect(() => {
         const scrollToElement = () => {
             const hash = window.location.hash;
@@ -42,7 +40,7 @@ function App() {
     }, []);  // Empty dependency array ensures this effect runs only once
 
     return (
-        <ThemeProvider theme={baseTheme}>
+        <ThemeProvider>
             <CssBaseline/>
             <HeaderBar/>
 

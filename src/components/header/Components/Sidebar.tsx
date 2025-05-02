@@ -6,6 +6,7 @@ import {NavButton} from "./Common/NavButton.tsx";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import AuthorName from "./Common/AuthorName.tsx";
 import buttonsConfig from "../HeaderBar.tsx";
+import {ThemeToggle} from "../../common/ThemeToggle.tsx";
 
 
 export const Sidebar: React.FC = () => {
@@ -41,7 +42,10 @@ export const Sidebar: React.FC = () => {
                     {buttonsConfig.map(button => (
                         <NavButton key={button.sectionId} {...button} onClick={closeSidebar}/>
                     ))}
-                    <CVButton/>
+                    <Box sx={{display: 'flex', alignItems: 'center', marginTop: '1rem'}}>
+                        <ThemeToggle/>
+                        <CVButton/>
+                    </Box>
                 </DrawerContainer>
             </SwipeableDrawer>
         </Hidden>

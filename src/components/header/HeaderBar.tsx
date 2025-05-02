@@ -1,8 +1,9 @@
 import React from 'react';
 import {Toolbar} from "./Components/Toolbar.tsx";
 import {styled} from "@mui/material/styles";
-import {AppBar as MuiAppBar, Toolbar as MuiToolbar} from "@mui/material";
+import {AppBar as MuiAppBar, Box, Toolbar as MuiToolbar} from "@mui/material";
 import {Sidebar} from "./Components/Sidebar.tsx";
+import {ThemeToggle} from "../common/ThemeToggle.tsx";
 
 const buttonsConfig = [
     {label: 'About', sectionId: 'about'},
@@ -15,7 +16,10 @@ export function HeaderBar(): React.ReactElement {
         <StyledAppBar position="sticky" id="header">
             <MuiToolbar>
                 <Toolbar/>
-                <Sidebar/>
+                <Box sx={{display: 'flex', alignItems: 'center'}}>
+                    <ThemeToggle/>
+                    <Sidebar/>
+                </Box>
             </MuiToolbar>
         </StyledAppBar>
     );

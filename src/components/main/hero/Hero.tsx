@@ -80,12 +80,13 @@ const StyledButton = styled(Button)(({theme}) => ({
     }
 }));
 
-export const TitleText = styled(Typography)({
+export const TitleText = styled(Typography)(({theme}) => ({
     fontFamily: '"Marcellus", serif',
     fontWeight: 400,
     fontSize: '2.625rem',
-    lineHeight: '4rem'
-});
+    lineHeight: '4rem',
+    color: theme.palette.text.primary
+}));
 
 const Highlight = styled('u')<{ color: string }>(({color = '#341677'}) => ({
     textDecoration: 'none',
@@ -165,25 +166,25 @@ const StyledBox = styled(Box)(({theme}) => ({
     },
 }));
 
-const HeroBox = styled(Box)`
-    width: 250px;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; // Ensures nothing spills out if the image is too large
-    border-radius: 50%; // Ensure the container itself is circular
-    border: 4px solid #fafafa;
+const HeroBox = styled(Box)(({theme}) => ({
+    width: '250px',
+    height: '250px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: '50%',
+    border: `4px solid ${theme.palette.background.default === '#121212' ? '#fafafa' : '#333333'}`,
 
-    & img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: 40% center; // Default center position
-        border-radius: 50%;
-        transition: object-position 0.3s ease; // Smooth transition when changing position
+    '& img': {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        objectPosition: '40% center',
+        borderRadius: '50%',
+        transition: 'object-position 0.3s ease',
     }
-`;
+}));
 
 const TextBox = styled(Box)(({theme}) => ({
     height: '100%',
