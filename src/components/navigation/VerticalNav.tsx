@@ -4,10 +4,11 @@ import {styled} from "@mui/material/styles";
 import buttonsConfig from "../header/HeaderBar.tsx";
 import PersonIcon from '@mui/icons-material/Person';
 import CodeIcon from '@mui/icons-material/Code';
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
-// Map section IDs to icons
 const sectionIcons: Record<string, React.ReactNode> = {
     'about': <PersonIcon/>,
+    'awards': <EmojiEventsIcon/>,
     'projects': <CodeIcon/>,
 };
 

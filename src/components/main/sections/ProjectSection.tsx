@@ -77,8 +77,7 @@ const StyledChip = styled(Chip)(({theme}) => ({
 }));
 
 
-const ChallengesSection: React.FC = () => {
-    // fallback placeholder if path isn’t valid
+const ProjectSection: React.FC = () => {
     const getImageSrc = (imagePath: string) =>
         imagePath.startsWith('http') ||
         imagePath.startsWith('/') ||
@@ -87,9 +86,9 @@ const ChallengesSection: React.FC = () => {
             : 'https://via.placeholder.com/400x225';
 
     return (
-        <HorizontalScrollSection title="Challenges" itemWidth={100} id="challenges">
+        <HorizontalScrollSection title="Projects" itemWidth={100}>
             {challengesData.map((challenge) => (
-                <Box key={challenge.id} sx={{height: '100%', px: '60px', py: '20px'}}>
+                <Box key={challenge.id} sx={{height: '60%', px: '60px', py: '20px'}}>
                     <ProjectCard>
                         <CardMedia
                             component="img"                 // render an actual <img>
@@ -117,4 +116,4 @@ const ChallengesSection: React.FC = () => {
     );
 };
 
-export default ChallengesSection;
+export default ProjectSection;

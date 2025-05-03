@@ -4,8 +4,8 @@ import SplitSection from "./layout/SplitSection";
 import FullPageSection from "./layout/FullPageSection";
 import AboutSection from "./sections/AboutSection";
 import {Hero} from "./hero/Hero.tsx";
-import AwardsSection from "./sections/AwardsSection.tsx";
-import ChallengesSection from "./sections/ChallengesSection.tsx";
+import AwardSection from "./sections/AwardsSection.tsx";
+import ProjectSection from "./sections/ProjectSection.tsx";
 
 export function MainWrapper(): React.ReactElement {
     return (
@@ -25,15 +25,12 @@ export function MainWrapper(): React.ReactElement {
                 }
             />
 
-            <FullPageSection id="projects" centerContent={false}>
-                <AwardsSection/>
+            <FullPageSection id="awards" centerContent={false}>
+                <AwardSection/>
             </FullPageSection>
 
-            <FullPageSection
-                id="challenges"
-                padding={2} // Reduced padding for horizontal scrolling
-            >
-                <ChallengesSection/>
+            <FullPageSection id="projects" centerContent={true}>
+                <ProjectSection/>
             </FullPageSection>
 
         </FullscreenSections>
