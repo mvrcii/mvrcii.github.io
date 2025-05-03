@@ -51,7 +51,6 @@ const ProjectDescription = styled(Typography)(({theme}) => ({
 const ProjectSection: React.FC = () => {
     return (
         <FullpageHorizontalSections
-            title="Projects"
             titleBarWidth={120}
             heightPercentage={100} // Ensure full height
         >
