@@ -73,7 +73,7 @@ const NavigationButton = styled(IconButton)(({theme}) => ({
 
 
 const DownButton = styled(NavigationButton)({
-    bottom: '20px',
+    bottom: '120px',
 });
 
 const UpButton = styled(NavigationButton)({
@@ -122,13 +122,13 @@ const FullscreenSections: React.FC<FullscreenSectionsProps> = ({
 
     const navigateUp = () => {
       if (activeSection > 0) {
-        ScrollManager.getInstance().scrollToSection(`section-${activeSection - 1}`);
+        ScrollManager.getInstance().scrollToSection(`${activeSection - 1}`);
       }
     };
 
     const navigateDown = () => {
       if (activeSection < totalSections - 1) {
-        ScrollManager.getInstance().scrollToSection(`section-${activeSection + 1}`);
+        ScrollManager.getInstance().scrollToSection(`${activeSection + 1}`);
       }
     };
 
