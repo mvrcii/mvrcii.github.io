@@ -3,14 +3,15 @@ import FullscreenSections from "./layout/FullscreenSections";
 import SplitSection from "./layout/SplitSection";
 import FullPageSection from "./layout/FullPageSection";
 import AboutSection from "./sections/AboutSection";
-import AwardsSection from "./sections/AwardsSection";
 import {Hero} from "./hero/Hero.tsx";
+import AwardsSection from "./sections/AwardsSection.tsx";
+import ChallengesSection from "./sections/ChallengesSection.tsx";
 
 export function MainWrapper(): React.ReactElement {
     return (
         <FullscreenSections
-            widthPercentage={100} // Set width to 75% of viewport
-            heightPercentage={100} // Set height to 75% of viewport
+            widthPercentage={100}
+            heightPercentage={100}
         >
             {/* First section: Hero + About */}
             <SplitSection
@@ -24,12 +25,16 @@ export function MainWrapper(): React.ReactElement {
                 }
             />
 
-            <FullPageSection id="projects" centerContent={true}>
+            <FullPageSection id="projects" centerContent={false}>
                 <AwardsSection/>
             </FullPageSection>
 
-
-
+            <FullPageSection
+                id="challenges"
+                padding={2} // Reduced padding for horizontal scrolling
+            >
+                <ChallengesSection/>
+            </FullPageSection>
 
         </FullscreenSections>
     );

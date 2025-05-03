@@ -9,12 +9,11 @@ import herzRadar from '../../../assets/herzRadar.png';
 const challengesData = [
     {
         id: 1,
-        title: 'Healthcare Hackathon Würzburg',
-        description:
-            'Developed a web app that uses voice biomarkers to monitor cardiac deterioration and severe heart failure in 3 days.',
+        title: 'Vesuvius 2023 GrandPrize Challenge',
+        description: '',
         image: herzRadar,
-        technologies: ['TensorFlow', 'Python', 'OpenCV'],
-        date: '2024',
+        technologies: ['Python', 'PyTorch'],
+        date: '2023',
     },
     {
         id: 2,
@@ -24,25 +23,7 @@ const challengesData = [
         image: '/path/to/challenge2.jpg', // Replace with actual path or import
         technologies: ['PyTorch', 'React', 'FastAPI'],
         date: '2023',
-    },
-    {
-        id: 3,
-        title: 'ML Explainability Research',
-        description:
-            'Researched and implemented novel approaches to make black-box neural networks more transparent.',
-        image: '/path/to/challenge3.jpg',
-        technologies: ['SHAP', 'LIME', 'Python'],
-        date: '2023',
-    },
-    {
-        id: 4,
-        title: 'Self-Supervised Learning Framework',
-        description:
-            'Built a framework for training models on unlabeled data, reducing annotation requirements by 70%.',
-        image: '/path/to/challenge4.jpg',
-        technologies: ['PyTorch', 'BYOL', 'SimCLR'],
-        date: '2022',
-    },
+    }
 ];
 
 const ProjectCard = styled(Card)(({theme}) => ({
