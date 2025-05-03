@@ -143,7 +143,6 @@ const HeroContainer = styled(Box)({
     justifyContent: 'center',
     alignItems: 'center',
     gap: '2rem',
-    paddingLeft: '12rem'
 });
 
 

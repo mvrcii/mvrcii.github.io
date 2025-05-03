@@ -28,9 +28,6 @@ const NavContainer = styled(Box, {
         ? 'rgba(250, 250, 250, 0.9)'
         : 'rgba(18, 18, 18, 0.9)',
     borderRadius: '0 8px 8px 0',
-    boxShadow: theme.shadows[3],
-    backdropFilter: 'blur(8px)',
-    WebkitBackdropFilter: 'blur(8px)',
     transition: 'all 0.3s ease',
     width: expanded ? '160px' : '48px', // Ensure enough width for icon + indicator
     [theme.breakpoints.down('md')]: {
