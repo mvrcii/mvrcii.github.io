@@ -110,11 +110,11 @@ const NavigationButton = styled(IconButton)(({theme}) => ({
 }));
 
 const LeftButton = styled(NavigationButton)({
-    left: '20px',
+    left: '10px',
 });
 
 const RightButton = styled(NavigationButton)({
-    right: '20px',
+    right: '10px',
 });
 
 const FullpageHorizontalSections: React.FC<FullpageHorizontalSectionsProps> = ({

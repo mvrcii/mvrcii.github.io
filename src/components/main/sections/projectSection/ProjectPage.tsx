@@ -14,10 +14,12 @@ const ProjectContainer = styled(Box)(({theme}) => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    padding: theme.spacing(4),
-    paddingTop: theme.spacing(4),
-    overflow: 'auto',
-    boxSizing: 'border-box', // Ensure padding is included in width/height calculations
+    padding: theme.spacing(6),
+    paddingTop: theme.spacing(6),
+    marginRight: theme.spacing(4),
+    marginLeft: theme.spacing(4),
+    overflow: 'hidden',
+    // boxSizing: 'border-box', // Ensure padding is included in width/height calculations
 }));
 
 const ProjectHeader = styled(Box)(({theme}) => ({

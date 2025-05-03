@@ -27,7 +27,7 @@ export function MainWrapper(): React.ReactElement {
                     }
                 />
 
-                <FullPageSection id="awards" centerContent={false}>
+                <FullPageSection id="awards" centerContent={true}>
                     <AwardSection/>
                 </FullPageSection>
 

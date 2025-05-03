@@ -19,7 +19,7 @@ const SectionContainer = styled(Box, {
     padding?: number | string;
 }>(({backgroundColor, centerContent, padding = 3, theme}) => ({
     width: '100%',
-    height: '100%',
+    height: '80%',
     backgroundColor: backgroundColor || 'transparent',
     display: 'flex',
     flexDirection: 'column',

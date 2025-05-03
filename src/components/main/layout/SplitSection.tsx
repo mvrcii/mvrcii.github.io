@@ -18,7 +18,7 @@ const SectionContainer = styled(Box, {
     ({theme, backgroundColor}) => ({
         display: 'flex',
         width: '100%',
-        height: '100%',
+        height: '80%',
         backgroundColor: backgroundColor || 'transparent',
         overflow: 'hidden',
         [theme.breakpoints.down('md')]: {
