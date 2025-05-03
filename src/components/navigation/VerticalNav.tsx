@@ -199,30 +199,64 @@ export const VerticalNav: React.FC = () => {
         return undefined;
     }, [isScrolling]); // Add isScrolling as a dependency
 
-    const handleNavigation = (sectionId: string) => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-            // Set active section immediately
-            setActiveSection(sectionId);
+const handleNavigation = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        // Set active section immediately
+        setActiveSection(sectionId);
 
-            // Set scrolling flag to prevent flicker
-            setIsScrolling(true);
+        // Set scrolling flag to prevent flicker
+        setIsScrolling(true);
 
-            // Perform smooth scroll
-            section.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        // Find the parent container that actually scrolls
+        const sectionsContainer = document.querySelector("[id^='section-']")?.parentElement;
 
-            // Updates URL without causing a scroll
-            window.history.pushState(null, "", `#${sectionId}`);
+        if (sectionsContainer) {
+            // Find the index of the section
+            const sectionElements = buttonsConfig.map(button =>
+                document.getElementById(button.sectionId)
+            ).filter(Boolean) as HTMLElement[];
 
-            // Reset scrolling flag after animation completes (approx 1 second)
-            setTimeout(() => {
-                setIsScrolling(false);
-            }, 1000);
+            const sectionIndex = sectionElements.findIndex(el => el.id === sectionId);
+
+            if (sectionIndex !== -1) {
+                // Calculate exact scroll position based on viewport height and index
+                // No header offset needed - the scroll container handles this internally
+                const scrollPosition = sectionIndex * sectionsContainer.clientHeight;
+
+                // Scroll the container directly to the exact calculated position
+                sectionsContainer.scrollTo({
+                    top: scrollPosition,
+                    behavior: 'smooth'
+                });
+
+                // Updates URL without causing a scroll
+                window.history.pushState(null, "", `#${sectionId}`);
+
+                // Reset scrolling flag after animation completes
+                setTimeout(() => {
+                    setIsScrolling(false);
+                }, 1000);
+
+                return;
+            }
         }
-    };
+
+        // Fallback to old method if something went wrong
+        section.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+
+        // Updates URL without causing a scroll
+        window.history.pushState(null, "", `#${sectionId}`);
+
+        // Reset scrolling flag after animation completes
+        setTimeout(() => {
+            setIsScrolling(false);
+        }, 1000);
+    }
+};
 
     return (
         <NavContainer
