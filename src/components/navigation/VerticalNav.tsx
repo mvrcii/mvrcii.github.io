@@ -5,6 +5,7 @@ import buttonsConfig from "../header/HeaderBar.tsx";
 import PersonIcon from '@mui/icons-material/Person';
 import CodeIcon from '@mui/icons-material/Code';
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import {ScrollManager} from "../../utils/ScrollManager.ts";
 
 const sectionIcons: Record<string, React.ReactNode> = {
     'about': <PersonIcon/>,
@@ -66,7 +67,7 @@ const NavItemContainer = styled(Box, {
 // Icon container
 const IconContainer = styled(Box, {
     shouldForwardProp: (prop) => !['active', 'expanded'].includes(prop as string)
-})<{ active: boolean; expanded: boolean }>(({ theme, active }) => ({
+})<{ active: boolean; expanded: boolean }>(({theme, active}) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -103,12 +104,12 @@ interface NavItemProps {
     onClick: () => void;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ label, sectionId, active, expanded, onClick }) => {
+const NavItem: React.FC<NavItemProps> = ({label, sectionId, active, expanded, onClick}) => {
     return (
         <Tooltip title={expanded ? '' : label} placement="right">
             <NavItemContainer active={active} expanded={expanded} onClick={onClick}>
                 <IconContainer active={active} expanded={expanded}>
-                    {sectionIcons[sectionId] || <Box sx={{ width: 24, height: 24 }} />}
+                    {sectionIcons[sectionId] || <Box sx={{width: 24, height: 24}}/>}
                 </IconContainer>
                 <NavLabel active={active} expanded={expanded}>
                     {label}
@@ -121,7 +122,6 @@ const NavItem: React.FC<NavItemProps> = ({ label, sectionId, active, expanded, o
 export const VerticalNav: React.FC = () => {
     const [expanded, setExpanded] = useState(false);
     const [activeSection, setActiveSection] = useState('');
-    const [isScrolling, setIsScrolling] = useState(false);
     const [isInHorizontalSection, setIsInHorizontalSection] = useState(false);
 
     // Detect if we're in a horizontal scroll section
@@ -131,7 +131,7 @@ export const VerticalNav: React.FC = () => {
 
         const observer = new IntersectionObserver(
             entries => setIsInHorizontalSection(entries[0].isIntersecting),
-            { threshold: 0.3 }
+            {threshold: 0.3}
         );
 
         observer.observe(challengesSection);
@@ -149,11 +149,10 @@ export const VerticalNav: React.FC = () => {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, [expanded, isInHorizontalSection]);
 
-    // Determine active section based on scroll position
     useEffect(() => {
         const handleScroll = () => {
             // Skip scroll updates if we're currently in a programmatic scroll
-            if (isScrolling) return;
+            if (ScrollManager.getInstance().isCurrentlyScrolling()) return;
 
             const sectionsContainer = document.querySelector("[id^='section-']")?.parentElement;
             if (!sectionsContainer) return;
@@ -194,66 +193,12 @@ export const VerticalNav: React.FC = () => {
         }
 
         return undefined;
-    }, [isScrolling]); // Add isScrolling as a dependency
+    }, []);
 
-const handleNavigation = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-        // Set active section immediately
+    const handleNavigation = (sectionId: string) => {
         setActiveSection(sectionId);
-
-        // Set scrolling flag to prevent flicker
-        setIsScrolling(true);
-
-        // Find the parent container that actually scrolls
-        const sectionsContainer = document.querySelector("[id^='section-']")?.parentElement;
-
-        if (sectionsContainer) {
-            // Find the index of the section
-            const sectionElements = buttonsConfig.map(button =>
-                document.getElementById(button.sectionId)
-            ).filter(Boolean) as HTMLElement[];
-
-            const sectionIndex = sectionElements.findIndex(el => el.id === sectionId);
-
-            if (sectionIndex !== -1) {
-                // Calculate exact scroll position based on viewport height and index
-                // No header offset needed - the scroll container handles this internally
-                const scrollPosition = sectionIndex * sectionsContainer.clientHeight;
-
-                // Scroll the container directly to the exact calculated position
-                sectionsContainer.scrollTo({
-                    top: scrollPosition,
-                    behavior: 'smooth'
-                });
-
-                // Updates URL without causing a scroll
-                window.history.pushState(null, "", `#${sectionId}`);
-
-                // Reset scrolling flag after animation completes
-                setTimeout(() => {
-                    setIsScrolling(false);
-                }, 1000);
-
-                return;
-            }
-        }
-
-        // Fallback to old method if something went wrong
-        section.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-
-        // Updates URL without causing a scroll
-        window.history.pushState(null, "", `#${sectionId}`);
-
-        // Reset scrolling flag after animation completes
-        setTimeout(() => {
-            setIsScrolling(false);
-        }, 1000);
-    }
-};
+        ScrollManager.getInstance().scrollToSection(sectionId);
+    };
 
     return (
         <NavContainer

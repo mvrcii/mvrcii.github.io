@@ -4,6 +4,7 @@ import {AppRoutes} from "./routes/AppRoutes.tsx";
 import {VerticalNav} from "./components/navigation/VerticalNav.tsx";
 import {useEffect} from "react";
 import {ThemeProvider} from "./theme/ThemeContext";
+import {ScrollManager} from "./utils/ScrollManager.ts";
 
 function App() {
     useEffect(() => {
@@ -11,17 +12,17 @@ function App() {
             const hash = window.location.hash;
             if (hash) {
                 const id = hash.replace('#', '');
-                document.getElementById(id)?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-
+                // Use ScrollManager instead of direct scrollIntoView
+                ScrollManager.getInstance().scrollToSection(id);
             } else {
                 // Scroll to header on page refresh && cleared hash
-                document.getElementById("header")?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                const header = document.getElementById("header");
+                if (header) {
+                    header.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             }
         };
 
@@ -37,7 +38,7 @@ function App() {
             window.removeEventListener('hashchange', scrollToElement);
             window.removeEventListener('popstate', scrollToElement);
         };
-    }, []);  // Empty dependency array ensures this effect runs only once
+    }, []);
 
     return (
         <ThemeProvider>

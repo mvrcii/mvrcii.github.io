@@ -3,6 +3,7 @@ import {Box, Container, IconButton} from '@mui/material';
 import {styled} from '@mui/material/styles';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { ScrollManager } from '../../../utils/ScrollManager';
 
 interface FullscreenSectionsProps {
     children: React.ReactNode;
@@ -119,26 +120,16 @@ const FullscreenSections: React.FC<FullscreenSectionsProps> = ({
         };
     }, []);
 
-    const scrollToSection = (sectionIndex: number) => {
-        if (containerRef.current) {
-            const targetScrollPosition = sectionIndex * window.innerHeight;
-            containerRef.current.scrollTo({
-                top: targetScrollPosition,
-                behavior: 'smooth',
-            });
-        }
-    };
-
     const navigateUp = () => {
-        if (activeSection > 0) {
-            scrollToSection(activeSection - 1);
-        }
+      if (activeSection > 0) {
+        ScrollManager.getInstance().scrollToSection(`section-${activeSection - 1}`);
+      }
     };
 
     const navigateDown = () => {
-        if (activeSection < totalSections - 1) {
-            scrollToSection(activeSection + 1);
-        }
+      if (activeSection < totalSections - 1) {
+        ScrollManager.getInstance().scrollToSection(`section-${activeSection + 1}`);
+      }
     };
 
     // Wrap each child in a Section component with container
