@@ -46,7 +46,6 @@ function App() {
             <HeaderBar/>
             <VerticalNav/>
             <AppRoutes/>
-            {/*<FooterBar/>*/}
         </ThemeProvider>
     );
 }
