@@ -5,7 +5,7 @@ import FullPageSection from "./layout/FullPageSection";
 import AboutSection from "./sections/AboutSection";
 import {Hero} from "./hero/Hero.tsx";
 import AwardSection from "./sections/AwardsSection.tsx";
-import ProjectSection from "./sections/ProjectSection.tsx";
+import ProjectSection from "./sections/projectSection/ProjectSection.tsx";
 
 export function MainWrapper(): React.ReactElement {
     return (
