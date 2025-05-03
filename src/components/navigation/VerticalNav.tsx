@@ -3,18 +3,12 @@ import {Box, Tooltip} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import buttonsConfig from "../header/HeaderBar.tsx";
 import PersonIcon from '@mui/icons-material/Person';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import SchoolIcon from '@mui/icons-material/School';
-import ExtensionIcon from '@mui/icons-material/Extension';
+import CodeIcon from '@mui/icons-material/Code';
 
 // Map section IDs to icons
 const sectionIcons: Record<string, React.ReactNode> = {
     'about': <PersonIcon/>,
-    'awards': <EmojiEventsIcon/>,
-    'publications': <MenuBookIcon/>,
-    'education': <SchoolIcon/>,
-    'challenges': <ExtensionIcon/>,
+    'projects': <CodeIcon/>,
 };
 
 const NavContainer = styled(Box, {
