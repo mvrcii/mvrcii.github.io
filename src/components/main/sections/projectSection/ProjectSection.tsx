@@ -4,6 +4,7 @@ import {styled} from '@mui/material/styles';
 import FullpageHorizontalSections from '../../layout/FullpageHorizontalSections';
 import ProjectPage from './ProjectPage';
 import herzRadar from '../../../../assets/herzRadar.png';
+import volcanoImage from '../../../../assets/vesuvius.jpg';
 
 // Sample data for projects - expand with your actual projects
 const projectsData = [
@@ -11,7 +12,7 @@ const projectsData = [
         id: 1,
         title: 'Vesuvius 2023 GrandPrize Challenge',
         description: 'Worked on developing advanced imaging algorithms to help read ancient scrolls from Herculaneum that were carbonized by volcanic eruptions in 79 CE. Used deep neural networks to detect ink traces in CT scan data.',
-        image: herzRadar,
+        image: volcanoImage,
         technologies: ['Python', 'PyTorch', 'Computer Vision'],
         date: '2023',
     },
