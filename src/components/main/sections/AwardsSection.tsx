@@ -12,6 +12,16 @@ const SectionBox = styled(Box)(({theme}) => ({
     padding: theme.spacing(4, 0),
 }));
 
+const ContentWrapper = styled(Box)(({theme}) => ({
+    maxWidth: '900px',
+    margin: '0 auto',
+    width: '100%',
+    padding: theme.spacing(0, 3),
+    [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(0, 2),
+    },
+}));
+
 const SectionTitle = styled(Typography)(({theme}) => ({
     marginBottom: theme.spacing(4),
     fontWeight: 700,
@@ -48,12 +58,26 @@ const StyledListItemIcon = styled(ListItemIcon)(({theme}) => ({
 const AwardTitle = styled(Typography)(() => ({
     fontWeight: 500,
     fontSize: '1.1rem',
+    display: 'flex',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '8px',
 }));
 
-const AwardYear = styled(Typography)(({theme}) => ({
-    color: theme.palette.text.secondary,
-    fontSize: '0.9rem',
-    fontWeight: 500,
+const YearBadge = styled(Box)(({theme}) => ({
+    display: 'inline-flex',
+    alignItems: 'center',
+    padding: '2px 10px',
+    borderRadius: '12px',
+    fontSize: '0.8rem',
+    fontWeight: 600,
+    backgroundColor: theme.palette.mode === 'dark'
+        ? 'rgba(144, 202, 249, 0.16)'
+        : 'rgba(25, 118, 210, 0.12)',
+    color: theme.palette.primary.main,
+    border: `1px solid ${theme.palette.mode === 'dark'
+        ? 'rgba(144, 202, 249, 0.3)'
+        : 'rgba(25, 118, 210, 0.3)'}`,
 }));
 
 const AwardDescription = styled(Typography)(({theme}) => ({
@@ -105,33 +129,37 @@ const awardsData = [
 const AwardsSection: React.FC = () => {
     return (
         <SectionBox>
-            <SectionTitle variant="h2">Awards</SectionTitle>
+            <ContentWrapper>
+                <SectionTitle variant="h2">Awards</SectionTitle>
 
-            <StyledList>
-                {awardsData.map((award) => (
-                    <StyledListItem key={award.id} disableGutters>
-                        <StyledListItemIcon>
-                            <EmojiEventsIcon/>
-                        </StyledListItemIcon>
-                        <ListItemText
-                            primary={
-                                <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <StyledList>
+                    {awardsData.map((award) => (
+                        <StyledListItem key={award.id} disableGutters>
+                            <StyledListItemIcon>
+                                <EmojiEventsIcon/>
+                            </StyledListItemIcon>
+                            <ListItemText
+                                primary={
                                     <Box>
                                         <AwardTitle>
-                                            {award.title}
-                                            {award.prize && <span style={{fontWeight: 600, marginLeft: '8px'}}>({award.prize})</span>}
+                                            <span>{award.title}</span>
+                                            <YearBadge>{award.year}</YearBadge>
+                                            {award.prize && (
+                                                <span style={{fontWeight: 600, fontSize: '0.95rem'}}>
+                                                    {award.prize}
+                                                </span>
+                                            )}
                                         </AwardTitle>
                                         {award.description && (
                                             <AwardDescription>{award.description}</AwardDescription>
                                         )}
                                     </Box>
-                                    <AwardYear sx={{marginLeft: 2, flexShrink: 0}}>{award.year}</AwardYear>
-                                </Box>
-                            }
-                        />
-                    </StyledListItem>
-                ))}
-            </StyledList>
+                                }
+                            />
+                        </StyledListItem>
+                    ))}
+                </StyledList>
+            </ContentWrapper>
         </SectionBox>
     );
 };
