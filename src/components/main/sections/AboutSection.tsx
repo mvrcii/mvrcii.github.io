@@ -53,8 +53,14 @@ const AboutSection: React.FC = () => {
       <SectionTitle variant="h2">About Me</SectionTitle>
 
       <Paragraph variant="body1">
-        My name is Marcel Roth. I'm an M.Sc. student in Computer Science at the Julius-Maximilians-Universität Würzburg,
-        specializing in Machine Learning, Computer Vision, Explainability, and Medical Imaging.
+        My name is Marcel Roth. I'm a Machine Learning Engineer who recently completed my M.Sc. in Computer Science
+        (Grade: 1.1 with distinction) at the Julius-Maximilians-Universität Würzburg, specializing in Machine Learning,
+        Computer Vision, Explainability, and Medical Imaging.
+      </Paragraph>
+
+      <Paragraph variant="body1">
+        Most recently, I built deep learning models that revealed the first readable title from a 2,000-year-old scroll
+        buried by Mount Vesuvius – turning carbonized papyrus into legible ancient text for the first time in two millennia.
       </Paragraph>
 
       <Paragraph variant="body1">
