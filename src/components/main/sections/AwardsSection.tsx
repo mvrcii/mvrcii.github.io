@@ -1,7 +1,8 @@
 import React from 'react';
-import {Box, List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
+import {Box, Link, List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 const SectionBox = styled(Box)(({theme}) => ({
     height: '100%',
@@ -60,6 +61,30 @@ const AwardTitle = styled(Typography)(() => ({
     fontSize: '1.1rem',
 }));
 
+const AwardLink = styled(Link)(({theme}) => ({
+    fontWeight: 500,
+    fontSize: '1.1rem',
+    textDecoration: 'none',
+    color: 'inherit',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    transition: 'all 0.2s ease',
+    '&:hover': {
+        color: theme.palette.primary.main,
+        textDecoration: 'none',
+        '& .link-icon': {
+            opacity: 1,
+            transform: 'translateX(2px) translateY(-2px)',
+        },
+    },
+    '& .link-icon': {
+        fontSize: '1rem',
+        opacity: 0.5,
+        transition: 'all 0.2s ease',
+    },
+}));
+
 const YearBadge = styled(Box)(({theme}) => ({
     display: 'inline-flex',
     alignItems: 'center',
@@ -89,7 +114,8 @@ const awardsData = [
         title: "Vesuvius Challenge 1st Title Prize",
         year: "2025",
         prize: "$60,000",
-        description: "Recovered the first known title from a 2,000-year-old carbonized Herculaneum scroll using a custom-built transformer-based segmentation model. Plus three additional progress prizes: May 2025 ($1,000), November 2024 ($1,000), and Grand Challenge 2023 ($1,000)."
+        description: "Recovered the first known title from a 2,000-year-old carbonized Herculaneum scroll using a custom-built transformer-based segmentation model. Plus three additional progress prizes: May 2025 ($1,000), November 2024 ($1,000), and Grand Challenge 2023 ($1,000).",
+        url: "https://www.nature.com/articles/d41586-025-01407-2"
     },
     {
         id: 2,
@@ -101,13 +127,15 @@ const awardsData = [
         id: 3,
         title: "Tierzählstation Challenge 1st Place",
         year: "2024",
-        description: "Deep learning for multi-species classification from camera trap images for wildlife animal population monitoring."
+        description: "Deep learning for multi-species classification from camera trap images for wildlife animal population monitoring.",
+        url: "https://beta.toolboxdatenkompetenz.de/challenges/tierzaehlstation?content=details"
     },
     {
         id: 4,
         title: "Capsule Vision 2024 Challenge 3rd Place",
         year: "2024",
-        description: "Domain-adaptive pre-training of self-supervised foundation models for medical image classification in gastrointestinal endoscopy."
+        description: "Domain-adaptive pre-training of self-supervised foundation models for medical image classification in gastrointestinal endoscopy.",
+        url: "https://cvip2024.iiitdm.ac.in/challenge"
     },
     {
         id: 5,
@@ -119,7 +147,8 @@ const awardsData = [
         id: 6,
         title: "NeurIPS 2023 MedFM Challenge 2nd Place",
         year: "2023",
-        description: "Few-shot learning for thorax, pathology, and endoscopy classification using foundation models to improve limited data scenarios."
+        description: "Few-shot learning for thorax, pathology, and endoscopy classification using foundation models to improve limited data scenarios.",
+        url: "https://medfm2023.grand-challenge.org/awards/"
     }
 ];
 
@@ -139,14 +168,26 @@ const AwardsSection: React.FC = () => {
                                 primary={
                                     <Box sx={{display: 'flex', gap: 3, alignItems: 'flex-start'}}>
                                         <Box sx={{flex: 1, minWidth: 0}}>
-                                            <AwardTitle>
-                                                {award.title}
-                                                {award.prize && (
-                                                    <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
-                                                        ({award.prize})
-                                                    </span>
-                                                )}
-                                            </AwardTitle>
+                                            {award.url ? (
+                                                <AwardLink href={award.url} target="_blank" rel="noopener noreferrer">
+                                                    {award.title}
+                                                    <OpenInNewIcon className="link-icon" />
+                                                    {award.prize && (
+                                                        <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
+                                                            ({award.prize})
+                                                        </span>
+                                                    )}
+                                                </AwardLink>
+                                            ) : (
+                                                <AwardTitle>
+                                                    {award.title}
+                                                    {award.prize && (
+                                                        <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
+                                                            ({award.prize})
+                                                        </span>
+                                                    )}
+                                                </AwardTitle>
+                                            )}
                                             {award.description && (
                                                 <AwardDescription>{award.description}</AwardDescription>
                                             )}
