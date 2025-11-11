@@ -56,32 +56,49 @@ const AwardYear = styled(Typography)(({theme}) => ({
     fontWeight: 500,
 }));
 
+const AwardDescription = styled(Typography)(({theme}) => ({
+    color: theme.palette.text.secondary,
+    fontSize: '0.875rem',
+    marginTop: theme.spacing(0.5),
+}));
+
 // Define your awards data
 const awardsData = [
     {
         id: 1,
-        title: "Capsule Vision 2024 Challenge",
-        year: "2024"
+        title: "Vesuvius Challenge 1st Title Prize",
+        year: "2025",
+        prize: "$60,000",
+        description: "Recovered the first known title from a 2,000-year-old carbonized Herculaneum scroll using a custom-built transformer-based segmentation model. Plus three additional progress prizes: May 2025 ($1,000), November 2024 ($1,000), and Grand Challenge 2023 ($1,000)."
     },
     {
         id: 2,
+        title: "Magnet4Cardiac7T Spring School 1st Place",
+        year: "2025",
+        description: "Optimized ultra-high-field MRI coil configurations, balancing magnetic field homogeneity and tissue heating."
+    },
+    {
+        id: 3,
+        title: "Tierzählstation Challenge 1st Place",
+        year: "2024",
+        description: "Developed a deep learning model for wildlife animal population monitoring."
+    },
+    {
+        id: 4,
+        title: "Capsule Vision 2024 Challenge 3rd Place",
+        year: "2024",
+        description: "Developed a deep learning model for medical image multi-class classification in gastrointestinal endoscopy."
+    },
+    {
+        id: 5,
         title: "Ultimate Jailbreaking Championship",
         year: "2024"
     },
     {
-        id: 3,
-        title: "Tierzählstation Challenge",
-        year: "2024"
-    },
-    {
-        id: 4,
-        title: "Vesuvius GrandPrize Challenge 2023",
-        year: "2023"
-    },
-    {
-        id: 5,
-        title: "NeurIPS 2023 MedFM Challenge",
-        year: "2023"
+        id: 6,
+        title: "NeurIPS 2023 MedFM Challenge 2nd Place",
+        year: "2023",
+        description: "Applied few-shot learning for thorax, pathology, and endoscopy classification, improving limited data scenarios."
     }
 ];
 
@@ -99,8 +116,16 @@ const AwardsSection: React.FC = () => {
                         <ListItemText
                             primary={
                                 <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                                    <AwardTitle>{award.title}</AwardTitle>
-                                    <AwardYear>{award.year}</AwardYear>
+                                    <Box>
+                                        <AwardTitle>
+                                            {award.title}
+                                            {award.prize && <span style={{fontWeight: 600, marginLeft: '8px'}}>({award.prize})</span>}
+                                        </AwardTitle>
+                                        {award.description && (
+                                            <AwardDescription>{award.description}</AwardDescription>
+                                        )}
+                                    </Box>
+                                    <AwardYear sx={{marginLeft: 2, flexShrink: 0}}>{award.year}</AwardYear>
                                 </Box>
                             }
                         />
