@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import {Box, Typography} from "@mui/material";
+import {styled} from "@mui/material/styles";
 
 const SectionBox = styled(Box)({
     display: 'flex',
@@ -54,21 +54,13 @@ const AboutSection: React.FC = () => {
 
       <Paragraph variant="body1">
         My name is Marcel Roth. I'm a Machine Learning Engineer who recently completed my M.Sc. in Computer Science
-        (Grade: 1.1 with distinction) at the Julius-Maximilians-Universität Würzburg, specializing in Machine Learning,
-        Computer Vision, Explainability, and Medical Imaging.
+        (Grade: 1.1 with distinction) at the Julius-Maximilians-Universität Würzburg.
       </Paragraph>
 
       <Paragraph variant="body1">
         Most recently, I built deep learning models that revealed the first readable title from a 2,000-year-old scroll
         buried by Mount Vesuvius – turning carbonized papyrus into legible ancient text for the first time in two millennia.
       </Paragraph>
-
-      <Paragraph variant="body1">
-        I thrive in challenging, complex domains – it feels as natural to me as breathing.
-      </Paragraph>
-
-        <Paragraph variant="body1">I approach research with the mindset that meaningful solutions emerge through persistence, curiosity,
-        and a deep understanding of the problem space.</Paragraph>
 
       <Paragraph variant="body1">
         Some things I've learned (the hard way):
