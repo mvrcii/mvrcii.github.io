@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Link, List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
+import {Box, Link, List, ListItem, ListItemIcon, ListItemText, Typography, useTheme} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -107,7 +107,34 @@ const AwardDescription = styled(Typography)(({theme}) => ({
     marginTop: theme.spacing(0.5),
 }));
 
-// Define your awards data
+// Helper function to extract rank from title
+const getRankFromTitle = (title: string): number | null => {
+    if (title.includes('1st')) return 1;
+    if (title.includes('2nd')) return 2;
+    if (title.includes('3rd')) return 3;
+    return null;
+};
+
+// Helper function to get trophy color based on rank
+const getTrophyColor = (title: string, isDarkMode: boolean): string => {
+    const rank = getRankFromTitle(title);
+
+    if (rank === 1) {
+        // Gold for 1st place
+        return isDarkMode ? '#FFD700' : '#FFA500';
+    } else if (rank === 2) {
+        // Silver for 2nd place
+        return isDarkMode ? '#C0C0C0' : '#A8A8A8';
+    } else if (rank === 3) {
+        // Bronze for 3rd place
+        return isDarkMode ? '#CD7F32' : '#B8763C';
+    }
+
+    // Default primary color for awards without placement
+    return '';
+};
+
+// Define your awards data (ordered by rank: 1st places first, then 2nd, then 3rd)
 const awardsData = [
     {
         id: 1,
@@ -124,6 +151,12 @@ const awardsData = [
         description: "Optimized ultra-high-field MRI coil configurations, balancing magnetic field homogeneity and tissue heating."
     },
     {
+        id: 5,
+        title: "Ultimate Jailbreaking Championship 1st Place",
+        year: "2024",
+        description: "Prompt engineering for bypassing LLM safety systems, jailbreaking models with only 0.008% success rate."
+    },
+    {
         id: 3,
         title: "Tierzählstation Challenge 1st Place",
         year: "2024",
@@ -131,73 +164,74 @@ const awardsData = [
         url: "https://beta.toolboxdatenkompetenz.de/challenges/tierzaehlstation?content=details"
     },
     {
-        id: 4,
-        title: "Capsule Vision 2024 Challenge 3rd Place",
-        year: "2024",
-        description: "Domain-adaptive pre-training of self-supervised foundation models for medical image classification in gastrointestinal endoscopy.",
-        url: "https://cvip2024.iiitdm.ac.in/challenge"
-    },
-    {
-        id: 5,
-        title: "Ultimate Jailbreaking Championship 1st Place",
-        year: "2024",
-        description: "Prompt engineering for bypassing LLM safety systems, jailbreaking models with only 0.008% success rate."
-    },
-    {
         id: 6,
         title: "NeurIPS 2023 MedFM Challenge 2nd Place",
         year: "2023",
         description: "Few-shot learning for thorax, pathology, and endoscopy classification using foundation models to improve limited data scenarios.",
         url: "https://medfm2023.grand-challenge.org/awards/"
+    },
+    {
+        id: 4,
+        title: "Capsule Vision 2024 Challenge 3rd Place",
+        year: "2024",
+        description: "Domain-adaptive pre-training of self-supervised foundation models for medical image classification in gastrointestinal endoscopy.",
+        url: "https://cvip2024.iiitdm.ac.in/challenge"
     }
 ];
 
 const AwardsSection: React.FC = () => {
+    const theme = useTheme();
+    const isDarkMode = theme.palette.mode === 'dark';
+
     return (
         <SectionBox>
             <ContentWrapper>
                 <SectionTitle variant="h2">Awards</SectionTitle>
 
                 <StyledList>
-                    {awardsData.map((award) => (
-                        <StyledListItem key={award.id} disableGutters>
-                            <StyledListItemIcon>
-                                <EmojiEventsIcon/>
-                            </StyledListItemIcon>
-                            <ListItemText
-                                primary={
-                                    <Box sx={{display: 'flex', gap: 3, alignItems: 'flex-start'}}>
-                                        <Box sx={{flex: 1, minWidth: 0}}>
-                                            {award.url ? (
-                                                <AwardLink href={award.url} target="_blank" rel="noopener noreferrer">
-                                                    {award.title}
-                                                    <OpenInNewIcon className="link-icon" />
-                                                    {award.prize && (
-                                                        <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
-                                                            ({award.prize})
-                                                        </span>
-                                                    )}
-                                                </AwardLink>
-                                            ) : (
-                                                <AwardTitle>
-                                                    {award.title}
-                                                    {award.prize && (
-                                                        <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
-                                                            ({award.prize})
-                                                        </span>
-                                                    )}
-                                                </AwardTitle>
-                                            )}
-                                            {award.description && (
-                                                <AwardDescription>{award.description}</AwardDescription>
-                                            )}
+                    {awardsData.map((award) => {
+                        const trophyColor = getTrophyColor(award.title, isDarkMode);
+
+                        return (
+                            <StyledListItem key={award.id} disableGutters>
+                                <StyledListItemIcon>
+                                    <EmojiEventsIcon sx={trophyColor ? {color: trophyColor} : {}} />
+                                </StyledListItemIcon>
+                                <ListItemText
+                                    primary={
+                                        <Box sx={{display: 'flex', gap: 3, alignItems: 'flex-start'}}>
+                                            <Box sx={{flex: 1, minWidth: 0}}>
+                                                {award.url ? (
+                                                    <AwardLink href={award.url} target="_blank" rel="noopener noreferrer">
+                                                        {award.title}
+                                                        <OpenInNewIcon className="link-icon" />
+                                                        {award.prize && (
+                                                            <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
+                                                                ({award.prize})
+                                                            </span>
+                                                        )}
+                                                    </AwardLink>
+                                                ) : (
+                                                    <AwardTitle>
+                                                        {award.title}
+                                                        {award.prize && (
+                                                            <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
+                                                                ({award.prize})
+                                                            </span>
+                                                        )}
+                                                    </AwardTitle>
+                                                )}
+                                                {award.description && (
+                                                    <AwardDescription>{award.description}</AwardDescription>
+                                                )}
+                                            </Box>
+                                            <YearBadge sx={{flexShrink: 0}}>{award.year}</YearBadge>
                                         </Box>
-                                        <YearBadge sx={{flexShrink: 0}}>{award.year}</YearBadge>
-                                    </Box>
-                                }
-                            />
-                        </StyledListItem>
-                    ))}
+                                    }
+                                />
+                            </StyledListItem>
+                        );
+                    })}
                 </StyledList>
             </ContentWrapper>
         </SectionBox>
