@@ -58,10 +58,6 @@ const StyledListItemIcon = styled(ListItemIcon)(({theme}) => ({
 const AwardTitle = styled(Typography)(() => ({
     fontWeight: 500,
     fontSize: '1.1rem',
-    display: 'flex',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: '8px',
 }));
 
 const YearBadge = styled(Box)(({theme}) => ({
@@ -140,19 +136,21 @@ const AwardsSection: React.FC = () => {
                             </StyledListItemIcon>
                             <ListItemText
                                 primary={
-                                    <Box>
-                                        <AwardTitle>
-                                            <span>{award.title}</span>
-                                            <YearBadge>{award.year}</YearBadge>
-                                            {award.prize && (
-                                                <span style={{fontWeight: 600, fontSize: '0.95rem'}}>
-                                                    {award.prize}
-                                                </span>
+                                    <Box sx={{display: 'flex', gap: 3, alignItems: 'flex-start'}}>
+                                        <Box sx={{flex: 1, minWidth: 0}}>
+                                            <AwardTitle>
+                                                {award.title}
+                                                {award.prize && (
+                                                    <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
+                                                        ({award.prize})
+                                                    </span>
+                                                )}
+                                            </AwardTitle>
+                                            {award.description && (
+                                                <AwardDescription>{award.description}</AwardDescription>
                                             )}
-                                        </AwardTitle>
-                                        {award.description && (
-                                            <AwardDescription>{award.description}</AwardDescription>
-                                        )}
+                                        </Box>
+                                        <YearBadge sx={{flexShrink: 0}}>{award.year}</YearBadge>
                                     </Box>
                                 }
                             />
