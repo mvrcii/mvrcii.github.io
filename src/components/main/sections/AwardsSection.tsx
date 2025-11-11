@@ -101,24 +101,25 @@ const awardsData = [
         id: 3,
         title: "Tierzählstation Challenge 1st Place",
         year: "2024",
-        description: "Developed a deep learning model for wildlife animal population monitoring."
+        description: "Deep learning for multi-species classification from camera trap images for wildlife animal population monitoring."
     },
     {
         id: 4,
         title: "Capsule Vision 2024 Challenge 3rd Place",
         year: "2024",
-        description: "Developed a deep learning model for medical image multi-class classification in gastrointestinal endoscopy."
+        description: "Domain-adaptive pre-training of self-supervised foundation models for medical image classification in gastrointestinal endoscopy."
     },
     {
         id: 5,
-        title: "Ultimate Jailbreaking Championship",
-        year: "2024"
+        title: "Ultimate Jailbreaking Championship 1st Place",
+        year: "2024",
+        description: "Prompt engineering for bypassing LLM safety systems, jailbreaking models with only 0.008% success rate."
     },
     {
         id: 6,
         title: "NeurIPS 2023 MedFM Challenge 2nd Place",
         year: "2023",
-        description: "Applied few-shot learning for thorax, pathology, and endoscopy classification, improving limited data scenarios."
+        description: "Few-shot learning for thorax, pathology, and endoscopy classification using foundation models to improve limited data scenarios."
     }
 ];
 
