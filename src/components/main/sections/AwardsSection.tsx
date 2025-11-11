@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Link, List, ListItem, ListItemIcon, ListItemText, Typography, useTheme} from "@mui/material";
+import {Box, Link, List, ListItem, ListItemIcon, Typography, useTheme} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -51,9 +51,8 @@ const StyledListItem = styled(ListItem)(({theme}) => ({
     },
 }));
 
-const StyledListItemIcon = styled(ListItemIcon)(({theme}) => ({
+const StyledListItemIcon = styled(ListItemIcon)(() => ({
     minWidth: '42px',
-    color: theme.palette.primary.main,
 }));
 
 const AwardTitle = styled(Typography)(() => ({
@@ -194,41 +193,37 @@ const AwardsSection: React.FC = () => {
 
                         return (
                             <StyledListItem key={award.id} disableGutters>
-                                <StyledListItemIcon>
-                                    <EmojiEventsIcon sx={trophyColor ? {color: trophyColor} : {}} />
+                                <StyledListItemIcon sx={{color: trophyColor || theme.palette.primary.main}}>
+                                    <EmojiEventsIcon />
                                 </StyledListItemIcon>
-                                <ListItemText
-                                    primary={
-                                        <Box sx={{display: 'flex', gap: 3, alignItems: 'flex-start'}}>
-                                            <Box sx={{flex: 1, minWidth: 0}}>
-                                                {award.url ? (
-                                                    <AwardLink href={award.url} target="_blank" rel="noopener noreferrer">
-                                                        {award.title}
-                                                        <OpenInNewIcon className="link-icon" />
-                                                        {award.prize && (
-                                                            <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
-                                                                ({award.prize})
-                                                            </span>
-                                                        )}
-                                                    </AwardLink>
-                                                ) : (
-                                                    <AwardTitle>
-                                                        {award.title}
-                                                        {award.prize && (
-                                                            <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
-                                                                ({award.prize})
-                                                            </span>
-                                                        )}
-                                                    </AwardTitle>
+                                <Box sx={{display: 'flex', gap: 3, alignItems: 'flex-start', flex: 1}}>
+                                    <Box sx={{flex: 1, minWidth: 0}}>
+                                        {award.url ? (
+                                            <AwardLink href={award.url} target="_blank" rel="noopener noreferrer">
+                                                {award.title}
+                                                <OpenInNewIcon className="link-icon" />
+                                                {award.prize && (
+                                                    <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
+                                                        ({award.prize})
+                                                    </span>
                                                 )}
-                                                {award.description && (
-                                                    <AwardDescription>{award.description}</AwardDescription>
+                                            </AwardLink>
+                                        ) : (
+                                            <AwardTitle>
+                                                {award.title}
+                                                {award.prize && (
+                                                    <span style={{fontWeight: 600, fontSize: '0.95rem', marginLeft: '8px'}}>
+                                                        ({award.prize})
+                                                    </span>
                                                 )}
-                                            </Box>
-                                            <YearBadge sx={{flexShrink: 0}}>{award.year}</YearBadge>
-                                        </Box>
-                                    }
-                                />
+                                            </AwardTitle>
+                                        )}
+                                        {award.description && (
+                                            <AwardDescription>{award.description}</AwardDescription>
+                                        )}
+                                    </Box>
+                                    <YearBadge sx={{flexShrink: 0}}>{award.year}</YearBadge>
+                                </Box>
                             </StyledListItem>
                         );
                     })}
