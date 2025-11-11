@@ -119,17 +119,13 @@ const getTrophyColor = (title: string, isDarkMode: boolean): string => {
     const rank = getRankFromTitle(title);
 
     if (rank === 1) {
-        // Gold for 1st place
         return isDarkMode ? '#FFD700' : '#FFA500';
     } else if (rank === 2) {
-        // Silver for 2nd place
         return isDarkMode ? '#C0C0C0' : '#A8A8A8';
     } else if (rank === 3) {
-        // Bronze for 3rd place
         return isDarkMode ? '#CD7F32' : '#B8763C';
     }
 
-    // Default primary color for awards without placement
     return '';
 };
 
@@ -190,11 +186,10 @@ const AwardsSection: React.FC = () => {
                 <StyledList>
                     {awardsData.map((award) => {
                         const trophyColor = getTrophyColor(award.title, isDarkMode);
-
                         return (
                             <StyledListItem key={award.id} disableGutters>
-                                <StyledListItemIcon sx={{color: trophyColor || theme.palette.primary.main}}>
-                                    <EmojiEventsIcon />
+                                <StyledListItemIcon>
+                                    <EmojiEventsIcon sx={{fill: trophyColor || theme.palette.primary.main}} />
                                 </StyledListItemIcon>
                                 <Box sx={{display: 'flex', gap: 3, alignItems: 'flex-start', flex: 1}}>
                                     <Box sx={{flex: 1, minWidth: 0}}>
