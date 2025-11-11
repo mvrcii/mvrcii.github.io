@@ -36,6 +36,17 @@ const Paragraph = styled(Typography)(({ theme }) => ({
     },
 }));
 
+const StyledList = styled('ul')(({ theme }) => ({
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2.5),
+    fontSize: '1.1rem',
+    lineHeight: 1.6,
+    paddingLeft: theme.spacing(3),
+    '& li': {
+        marginBottom: theme.spacing(0.5),
+    },
+}));
+
 const AboutSection: React.FC = () => {
   return (
     <SectionBox>
@@ -54,15 +65,16 @@ const AboutSection: React.FC = () => {
         and a deep understanding of the problem space.</Paragraph>
 
       <Paragraph variant="body1">
-        Some things I’ve learned (the hard way):
-        <ul>
-          <li>Complex problems are best solved in a focused duo.</li>
-          <li>Clear, direct communication is a force multiplier.</li>
-          <li>If your results look weird, check for double sigmoid — I’ve been there.</li>
-          <li>Good architecture can’t fix bad data.</li>
-          <li>Ancient Herculaneum scrolls are smaller than you think.</li>
-        </ul>
+        Some things I've learned (the hard way):
       </Paragraph>
+
+      <StyledList>
+        <li>Complex problems are best solved in a focused duo.</li>
+        <li>Clear, direct communication is a force multiplier.</li>
+        <li>If your results look weird, check for double sigmoid — I've been there.</li>
+        <li>Good architecture can't fix bad data.</li>
+        <li>Ancient Herculaneum scrolls are smaller than you think.</li>
+      </StyledList>
     </SectionBox>
   );
 };
