@@ -44,10 +44,16 @@ const StyledList = styled(List)(() => ({
 }));
 
 const StyledListItem = styled(ListItem)(({theme}) => ({
-    padding: theme.spacing(1.5, 0),
-    transition: 'transform 0.2s ease',
+    padding: theme.spacing(1.5, 2),
+    marginLeft: theme.spacing(-2),
+    marginRight: theme.spacing(-2),
+    borderRadius: '12px',
+    transition: 'all 0.2s ease',
     '&:hover': {
         transform: 'translateX(8px)',
+        backgroundColor: theme.palette.mode === 'dark'
+            ? 'rgba(255, 255, 255, 0.05)'
+            : 'rgba(0, 0, 0, 0.03)',
     },
 }));
 
